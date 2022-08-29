@@ -13,15 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('scratch_codes', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string("code", 9)->unique();
-            $table->tinyInteger("status")->default(0);
-            $table->string("type", 3);
-            $table->foreignId("export_batch_id")->constrained()->default(0);
-            $table->foreignId("user_id")->constrained();
-            $table->foreignId("company_id")->constrained();
+            $table->string("name", 100);
+            $table->string("short_code", 4);
         });
     }
 
@@ -32,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('scratch_codes');
+        Schema::dropIfExists('companies');
     }
 };
