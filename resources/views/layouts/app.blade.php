@@ -21,21 +21,21 @@
         <nav class="bg-white border-gray-200 dark:bg-gray-900">
             <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl px-4 md:px-6 py-2.5">
                 <a class="flex items-center" href="{{ url('/') }}">
-                    {{-- <img src="" class="mr-3 h-6 sm:h-9" alt="Logo" /> --}}
+                    {{-- <img src="" class="h-6 mr-3 sm:h-9" alt="Logo" /> --}}
                     <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">{{ config('app.name', 'Laravel') }}</span>
                 </a>
                 {{-- <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button> --}}
 
-                <div class="flex items-center" >
+                <div class="flex items-center w-24" >
                     <!-- Left Side Of Navbar -->
                     {{-- <ul class="navbar-nav me-auto">
 
                     </ul> --}}
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="flex items-center justifyr-space-between">
+                    <ul class="flex items-center w-full space-x-4">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
