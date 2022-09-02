@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("code", 9)->unique();
             $table->tinyInteger("status")->default(0);
             $table->string("type", 3);
-            $table->foreignId("export_batch_id")->constrained()->default(0);
+            $table->foreignId("export_patch_id")->constrained()->default(0);
             $table->foreignId("user_id")->constrained();
             $table->foreignId("company_id")->constrained();
         });
