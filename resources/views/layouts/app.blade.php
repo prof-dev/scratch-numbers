@@ -51,16 +51,22 @@
                             @endif
                         @else
                             <li class="flex items-center justify-between">
-                                <a id="navbarDropdown" class="text-sm font-medium text-gray-600 dark:text-blue-500" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{-- <a id="navbarDropdown" class="text-sm font-medium text-gray-600 dark:text-blue-500" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
-                                </a>
-
+                                </a> --}}
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                    @if (Route::current()->getName() == 'home')
+                                        <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                        document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+                                        @else
+                                        <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('home') }}">
+                                            {{ __('Home') }}
+                                        </a>
+                                    @endif
+
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
