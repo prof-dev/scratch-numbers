@@ -33,6 +33,10 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('1234567890'),
             'role_id' => 1,
         ]);
+        \App\Models\Company::factory()->create([
+            'name' => 'TransSudan',
+            'code' => 'TSD',
+        ]);
 
     }
 }
