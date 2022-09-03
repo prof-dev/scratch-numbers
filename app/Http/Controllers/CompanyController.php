@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -13,7 +14,8 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        return view('company');
+        $companies = Company::all();
+        return view('company',['companies' => $companies]);
     }
 
     /**
@@ -24,7 +26,20 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate(
+            [
+                'name' => 'required',
+                'code' => 'required|unique:companies|string|min:3'
+                ]
+        );
+
+        Company::create(
+            [
+                'name' => $validated['name'],
+                'code' => $validated['code'],
+            ]
+        );
+        return redirect()->route('company')->with('success', 'Company created.');
     }
 
     /**
