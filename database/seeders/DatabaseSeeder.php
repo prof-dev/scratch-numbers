@@ -18,13 +18,20 @@ class DatabaseSeeder extends Seeder
 
 
         \App\Models\Role::factory()->create([
+            'id' => 1,
             'name' => 'ADMIN',
         ]);
         \App\Models\Role::factory()->create([
-            'name' => 'USER',
+            'id' => 2,
+            'name' => 'READ_AND_WRITE',
         ]);
         \App\Models\Role::factory()->create([
-            'name' => 'COMPANY',
+            'id' => 3,
+            'name' => 'READ',
+        ]);
+        \App\Models\Role::factory()->create([
+            'id' => 4,
+            'name' => 'APT_CONSUMER',
         ]);
 
         \App\Models\User::factory()->create([
