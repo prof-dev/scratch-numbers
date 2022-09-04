@@ -47,31 +47,59 @@
         </div>
             <div class="relative overflow-x-auto overflow-y-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-white uppercase bg-gray-900 dark:bg-gray-700 dark:text-gray-400">
+                    <thead class="text-xs text-center text-white uppercase bg-gray-900 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                Company Name
+                                Batches
                             </th>
                             <th scope="col" class="px-6 py-3">
-                                # Users In Company
+                                Compnay
                             </th>
-                            {{-- <th scope="col" class="px-6 py-3 text-center">
-                                Action
-                            </th> --}}
+                            <th scope="col" class="px-6 py-3 text-center">
+                                # of Codes
+                            </th>
+                            <th scope="col" class="px-6 py-3 text-center border-l-2">
+                                Actions
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {{-- @foreach($companies as $company) --}}
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                <td  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                     {{-- {{ $company->name }} --}}
-                                </th>
+                                    code 1
+                                </td>
+
                                 <td class="px-6 py-4">
                                     {{-- {{ $company->code }} --}}
+                                    code
                                 </td>
-                                {{-- <td class="px-6 py-4 text-center">
-                                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
-                                </td> --}}
+
+                                <td class="px-6 py-4">
+                                    {{-- {{ $company->code }} --}}
+                                    code
+                                </td>
+
+                                <td class="px-6 py-4 border-l-2">
+                                    {{-- {{ $company->code }} --}}
+                                    <div class="flex">
+                                        <div class="flex items-center justify-between w-full">
+                                            <div class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
+                                                Details
+                                            </div>
+                                            <div class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
+                                                Details
+                                            </div>
+                                            <div class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
+                                                Details
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+
+
+
                             </tr>
                         {{-- @endforeach --}}
                     </tbody>
