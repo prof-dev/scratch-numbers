@@ -84,4 +84,7 @@
         </main>
     </div>
 </body>
+
+<script src="http://unpkg.com/turbolinks"></script>
+<script src="http://unpkg.com/turbolinks"></script>
 </html>
