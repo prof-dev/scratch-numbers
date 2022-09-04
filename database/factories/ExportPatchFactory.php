@@ -23,11 +23,5 @@ class ExportPatchFactory extends Factory
             // 'batch_size' =>$this->faker->randomDigitNotNull(),
             'company_id' => Company::factory()->count(1)->create()->first()->id,
         ];
-        // $table->id();
-            // $table->timestamps();
-        //     $table->foreignId("user_id")->constrained();
-        //     $table->integer('batch_number');
-        //     $table->foreignId('company_id')->constrained();
-        // });
     }
 }
