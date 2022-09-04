@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class ExportPatch extends Model
 {
     use HasFactory;
+
+    protected $table = 'export_batches';
 }
