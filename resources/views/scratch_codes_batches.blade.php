@@ -89,10 +89,10 @@
                                                 Details
                                             </div>
                                             <div class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
-                                                Details
+                                                Export
                                             </div>
                                             <div class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
-                                                Details
+                                                Delete
                                             </div>
                                         </div>
                                     </div>
