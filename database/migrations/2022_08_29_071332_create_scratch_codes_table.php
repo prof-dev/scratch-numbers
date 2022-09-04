@@ -20,8 +20,8 @@ return new class extends Migration
             $table->tinyInteger("status")->default(0); // used or not used 1 for used 0 for not used
             $table->string("type", 3); //like INT , SDN , KSA ....
             $table->foreignId("export_batch_id")->constrained()->default(0); // batch identify
-            $table->foreignId("user_id")->constrained(); // user identify
-            $table->foreignId("company_id")->constrained(); // company identify
+            // $table->foreignId("user_id")->constrained(); // user identify
+            // $table->foreignId("company_id")->constrained(); // company identify
         });
     }
 
