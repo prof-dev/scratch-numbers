@@ -64,44 +64,39 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @foreach($companies as $company) --}}
+                        @foreach($batches as $batch)
                             <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                 <td  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{-- {{ $company->name }} --}}
-                                    code 1
+                                    {{ $batch->id }}
                                 </td>
 
                                 <td class="px-6 py-4">
-                                    {{-- {{ $company->code }} --}}
+                                    {{ $batch->company->name }}
                                     code
                                 </td>
 
                                 <td class="px-6 py-4">
-                                    {{-- {{ $company->code }} --}}
-                                    code
+                                    {{ $batch->numberOfScratchCodes() }}
                                 </td>
 
                                 <td class="px-6 py-4 border-l-2">
                                     {{-- {{ $company->code }} --}}
                                     <div class="flex">
                                         <div class="flex items-center justify-between w-full">
-                                            <div class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
+                                            <a class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
                                                 Details
-                                            </div>
-                                            <div class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
+                                            </a>
+                                            <a class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
                                                 Export
-                                            </div>
-                                            <div class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
+                                            </a>
+                                            <a class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
                                                 Delete
-                                            </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </td>
-
-
-
                             </tr>
-                        {{-- @endforeach --}}
+                        @endforeach
                     </tbody>
                 </table>
             </div>

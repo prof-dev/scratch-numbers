@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExportPatch;
 use App\Models\ScratchCode;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,8 @@ class ScratchCodesController extends Controller
      */
     public function index()
     {
-        $codes = ScratchCode::all();
-        return view('scratch_codes_batches');
+        $batches = ExportPatch::with('company')->get();
+        return view('scratch_codes_batches',['batches' => $batches]);
     }
 
     /**
