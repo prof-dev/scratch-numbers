@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('scratch_codes', function (Blueprint $table) {
             $table->id();
-            // $table->timestamps();
+            $table->timestamps();
             $table->string("code", 9)->unique(); // $company code . random number
             $table->tinyInteger("status")->default(0); // used or not used 1 for used 0 for not used
             $table->string("type", 3); //like INT , SDN , KSA ....
