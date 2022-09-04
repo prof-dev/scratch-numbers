@@ -19,5 +19,8 @@ class ExportPatch extends Model
         return $this->hasMany(ScratchCode::class);
     }
 
+    public function numberOfScratchCodes(){
+        return ScratchCode::where('export_batch_id',$this->id)->get()->count();
+    }
 
 }
