@@ -17,7 +17,7 @@ class ScratchCode extends Model
     ];
 
     public function ExportPatch(){
-        return $this->hasOne('App\Models\ScratchCodeExport');
+        return $this->belongsTo('App\Models\ScratchCodeExport');
     }
 
     public static function generateCodes($company, $numberOfCodes, $type){
