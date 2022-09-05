@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\ExportPatch;
 use App\Models\ScratchCode;
+use App\Rules\Uppercase;
 use Illuminate\Http\Request;
 
 class ScratchCodesController extends Controller
@@ -29,7 +30,17 @@ class ScratchCodesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate(
+            [
+                'number' => 'required|integer|min:1',
+                'company'=> 'required|integer',
+                'type'=> ['string','size:3', new Uppercase]
+            ]
+        );
+        ScratchCode::generateCodes($validated['company'],$validated['number'],$validated['type']);
+        // dd($validated);
+
+        return redirect()->route('scratch_codes_batches');
     }
 
     /**
