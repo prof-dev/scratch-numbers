@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\ExportPatch;
 use App\Models\ScratchCode;
 use Illuminate\Http\Request;
@@ -50,10 +51,12 @@ class BatchDetailsController extends Controller
         // dd(ExportPatch::with('ScratchCodes')->get());
         // dd(ScratchCode::where('export_batch_id', $exportPatch->id)->get());
         // dd($exportPatch);
+        // ;
         return view(
             'batch_details',
             [
                 'exportPatch' => $exportPatch,
+                'company' => Company::find($exportPatch->company_id)->first(),
                 'codes' => ScratchCode::where('export_batch_id', $exportPatch->id)->get()
             ]
         );
