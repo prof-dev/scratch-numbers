@@ -103,13 +103,13 @@
                                     {{-- {{ $company->code }} --}}
                                     <div class="flex">
                                         <div class="flex items-center justify-between w-full">
-                                            <a class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
+                                            <a href="" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                 Details
                                             </a>
-                                            <a class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
+                                            <a class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                 Export
                                             </a>
-                                            <a class="inline-flex items-center text-indigo-600 hover:underline hover:text-blue-800">
+                                            <a class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                 Delete
                                             </a>
                                         </div>
