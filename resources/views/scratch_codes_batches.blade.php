@@ -103,7 +103,7 @@
                                     {{-- {{ $company->code }} --}}
                                     <div class="flex">
                                         <div class="flex items-center justify-between w-full">
-                                            <a href="" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
+                                            <a href="{{ url('batch_details/'.$batch->id) }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                 Details
                                             </a>
                                             <a class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
