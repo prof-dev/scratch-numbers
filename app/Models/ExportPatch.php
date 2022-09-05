@@ -9,6 +9,12 @@ class ExportPatch extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'batch_number',
+        'company_id'
+    ];
+
     protected $table = 'export_batches';
 
     public function company(){
