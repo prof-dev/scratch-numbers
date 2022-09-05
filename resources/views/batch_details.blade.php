@@ -16,32 +16,13 @@
 
                             <div class="col-start-1 col-end-7">
                                 <input disabled id="number" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('number') is-invalid @enderror" name="number" value="{{ $exportPatch->batch_number }}" required autocomplete="name" autofocus>
-
-                                @error('number')
-                                    <span class="text-red-600" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         </div>
 
                         <div class="row-auto mb-3">
                             <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Company') }}</label>
                             <input disabled id="company" name="company" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ $company->name }}">
-                                {{-- <option selected>Choose a company</option> --}}
-                                {{-- @foreach($companies as $company)
-                                    @if (old('company') == $company->id)
-                                        <option value="{{ $company->id }}" selected>{{ $company->name }}</option>
-                                    @else
-                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
-                                    @endif
-                                @endforeach --}}
                             </input>
-                            @error('company')
-                                <span class="text-red-600" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
 
 
