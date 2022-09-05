@@ -2,10 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExportPatchsExport;
+use App\Models\ExportPatch;
+use App\Models\ScratchCode;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class BatchController extends Controller
 {
+
+    public function export(ExportPatch $exportPatch)
+    {
+        $codes = ScratchCode::where('export_batch_id',$exportPatch->id)->where('deleted_at', '=', null)
+        ->get(
+            [
+                'code',
+                'status',
+                'export_batch_id',
+                'type'
+            ]
+            );
+        if($codes->isNotEmpty()){
+            $export = new ExportPatchsExport([
+                $codes
+            ]);
+            return Excel::download($export, 'Clients.xlsx');
+        }
+        return redirect()->route('scratch_codes_batches');
+    }
+
     /**
      * Display a listing of the resource.
      *

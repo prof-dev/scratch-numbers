@@ -106,7 +106,7 @@
                                             <a href="{{ url('batch_details/'.$batch->id) }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                 Details
                                             </a>
-                                            <a class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
+                                            <a href="{{ url('batch_details/'.$batch->id.'/export') }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                 Export
                                             </a>
                                             <a class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
