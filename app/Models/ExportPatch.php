@@ -22,7 +22,7 @@ class ExportPatch extends Model
     }
 
     public function ScratchCodes(){
-        return $this->hasMany(ScratchCode::class);
+        return $this->hasMany(ScratchCode::class, 'id','export_batch_id');
     }
 
     public function numberOfScratchCodes(){
