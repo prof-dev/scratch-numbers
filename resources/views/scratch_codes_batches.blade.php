@@ -10,12 +10,12 @@
                 <form action="{{ route('create_company') }}" method="POST">
                     @csrf
                     <div class="row-auto mb-3">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Company Name') }}</label>
+                        <label for="number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Number of Codes') }}</label>
 
                         <div class="col-start-1 col-end-7">
-                            <input id="name" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <input id="number" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('number') is-invalid @enderror" name="number" value="{{ old('number') }}" required autocomplete="name" autofocus>
 
-                            @error('name')
+                            @error('number')
                                 <span class="text-red-600" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -24,12 +24,32 @@
                     </div>
 
                     <div class="row-auto mb-3">
-                        <label for="code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Company Code') }}</label>
+                        <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Company') }}</label>
+                        <select id="company" name="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <option selected>Choose a company</option>
+                            @foreach($companies as $company)
+                                @if (old('company') == $company->id)
+                                    <option value="{{ $company->id }}" selected>{{ $company->name }}</option>
+                                @else
+                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                @endif
+                            @endforeach
+                        </select>
+                        @error('company')
+                            <span class="text-red-600" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+
+                    <div class="row-auto mb-3">
+                        <label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ __('Code Type') }}</label>
 
                         <div class="col-start-1 col-end-7">
-                            <input id="code" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('name') is-invalid @enderror" name="code" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                            <input id="type" type="text" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 @error('type') is-invalid @enderror" name="type" value="{{ old('type') }}" required autofocus>
 
-                            @error('code')
+                            @error('type')
                                 <span class="text-red-600" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -39,7 +59,7 @@
 
                     <div class="flex pt-8 flex-end sm:justify-end sm:pt-0">
                         <button type="submit" class="text-white bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  rounded-lg text-sm px-4 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 ">
-                            Add Company
+                            Create Batch
                         </button>
                     </div>
                 </form>
