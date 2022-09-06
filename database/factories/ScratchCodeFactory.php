@@ -18,10 +18,10 @@ class ScratchCodeFactory extends Factory
     public function definition()
     {
         return [
-            'code' => 'TSD'. $this->faker->unique()->randomNumber(6),
+            'code' => 'TSD'.$this->faker->unique()->randomNumber(6),
             'status' => false,
             'type' => $this->faker->countryCode(),
-            'export_batch_id' => ExportPatch::factory(1)->create()->first()->id
+            'export_batch_id' => ExportPatch::factory(1)->create()->first()->id,
         ];
     }
 }

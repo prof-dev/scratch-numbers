@@ -6,11 +6,8 @@ use App\Models\ScratchCode;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
-
 class ScartchController extends Controller
 {
-
-
     public function exportExcel(Request $request)
     {
         $this->authorizeForUser($request->user('api'), 'view', ScratchCode::class);

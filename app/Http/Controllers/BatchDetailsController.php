@@ -57,7 +57,7 @@ class BatchDetailsController extends Controller
             [
                 'exportPatch' => $exportPatch,
                 'company' => Company::find($exportPatch->company_id)->first(),
-                'codes' => ScratchCode::where('export_batch_id', $exportPatch->id)->get()
+                'codes' => ScratchCode::where('export_batch_id', $exportPatch->id)->get(),
             ]
         );
     }

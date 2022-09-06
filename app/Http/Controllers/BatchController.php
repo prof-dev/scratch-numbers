@@ -8,25 +8,24 @@ use App\Models\ScratchCode;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
-
 class BatchController extends Controller
 {
-
     public function export(ExportPatch $exportPatch)
     {
-        $codes = ScratchCode::where('export_batch_id',$exportPatch->id)->where('deleted_at', '=', null)
+        $codes = ScratchCode::where('export_batch_id', $exportPatch->id)->where('deleted_at', '=', null)
         ->get(
             [
                 'code',
                 'status',
                 'export_batch_id',
-                'type'
+                'type',
             ]
-            );
-        if($codes->isNotEmpty()){
+        );
+        if ($codes->isNotEmpty()) {
             // $export = ;
             return Excel::download(new ExportPatchsExport($exportPatch->id), 'Clients.xlsx');
         }
+
         return redirect()->route('scratch_codes_batches');
     }
 

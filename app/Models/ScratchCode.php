@@ -14,16 +14,16 @@ class ScratchCode extends Model
         'code',
         'type',
         'status',
-        'export_batch_id'
+        'export_batch_id',
     ];
 
-    public function ExportPatch(){
+    public function ExportPatch()
+    {
         return $this->belongsTo('App\Models\ScratchCodeExport');
     }
 
-    public static function generateCodes($company, $numberOfCodes, $type){
-
-
+    public static function generateCodes($company, $numberOfCodes, $type)
+    {
         //find the company with this id
         $company = Company::find($company);
 
@@ -31,12 +31,12 @@ class ScratchCode extends Model
         $batch = ExportPatch::create(
             [
                 'user_id' => current_user()->id,
-                'batch_number' => $lastBatch->batch_number+1,
+                'batch_number' => $lastBatch->batch_number + 1,
                 'company_id' => $company->id,
             ]
         );
 
-        for($i = 0; $i < $numberOfCodes; $i++){
+        for ($i = 0; $i < $numberOfCodes; $i++) {
             //create one
             $code = ScratchCode::createOneCode($company);
             //add the code to the database
@@ -45,30 +45,32 @@ class ScratchCode extends Model
                     'code' => $code,
                     'type' => $type,
                     'status' => false,
-                    'export_batch_id' => $batch->id
+                    'export_batch_id' => $batch->id,
                 ]
             );
         }
-
     }
-    private static function createOneCode($company){
+
+    private static function createOneCode($company)
+    {
         //create random number
         $number = mt_rand(100000, 999999);
         //concatenate the company code with the random number
         // to create the random code
-        $code = $company->code . $number;
+        $code = $company->code.$number;
 
         //check if the code exists in the database
-        if(ScratchCode::codeExists($code)){
+        if (ScratchCode::codeExists($code)) {
             //create new code if it does exist
             return ScratchCode::createOneCode($company);
         }
+
         return $code;
     }
 
-    private static function codeExists($code) {
+    private static function codeExists($code)
+    {
         //find a non used code for this company
-        return ScratchCode::where('code',$code)->exists();
+        return ScratchCode::where('code', $code)->exists();
     }
-
 }

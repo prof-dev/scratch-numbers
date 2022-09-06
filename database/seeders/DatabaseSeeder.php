@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-
         \App\Models\Role::factory()->create([
             'id' => 1,
             'name' => 'ADMIN',
@@ -44,6 +43,5 @@ class DatabaseSeeder extends Seeder
             'name' => 'TransSudan',
             'code' => 'TSD',
         ]);
-
     }
 }

@@ -15,7 +15,8 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        return view('company',['companies' => $companies]);
+
+        return view('company', ['companies' => $companies]);
     }
 
     /**
@@ -29,8 +30,8 @@ class CompanyController extends Controller
         $validated = $request->validate(
             [
                 'name' => 'required',
-                'code' => 'required|unique:companies|string|min:3'
-                ]
+                'code' => 'required|unique:companies|string|min:3',
+            ]
         );
 
         Company::create(
@@ -39,6 +40,7 @@ class CompanyController extends Controller
                 'code' => $validated['code'],
             ]
         );
+
         return redirect()->route('company')->with('success', 'Company created.');
     }
 

@@ -14,13 +14,11 @@ class ScratchsExport implements FromArray, WithHeadings, ShouldAutoSize, WithEve
     /**
      * @return \Illuminate\Support\Collection
      */
-    function array(): array
+    public function array(): array
     {
         $scratches = ScratchCode::where('deleted_at', '=', null)->orderBy('id', 'DESC')->get();
         if ($scratches->isNotEmpty()) {
-
             foreach ($scratches as $scratch) {
-
                 $item['code'] = $scratch->code;
                 $item['status'] = $scratch->status;
                 $item['batch'] = $scratch->scratch_batch_id;

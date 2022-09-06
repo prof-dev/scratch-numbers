@@ -12,26 +12,28 @@ class ExportPatch extends Model
     protected $fillable = [
         'user_id',
         'batch_number',
-        'company_id'
+        'company_id',
     ];
 
     protected $table = 'export_batches';
 
-    public function company(){
+    public function company()
+    {
         return $this->belongsTo(Company::class);
     }
 
-    public function ScratchCodes(){
-        return $this->hasMany(ScratchCode::class, 'id','export_batch_id');
+    public function ScratchCodes()
+    {
+        return $this->hasMany(ScratchCode::class, 'id', 'export_batch_id');
     }
 
-    public function numberOfScratchCodes(){
-        return ScratchCode::where('export_batch_id',$this->id)->get()->count();
+    public function numberOfScratchCodes()
+    {
+        return ScratchCode::where('export_batch_id', $this->id)->get()->count();
     }
 
     public function getRouteKey()
     {
         return 'id';
     }
-
 }

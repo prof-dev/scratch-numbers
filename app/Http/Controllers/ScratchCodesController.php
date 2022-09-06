@@ -19,7 +19,8 @@ class ScratchCodesController extends Controller
     {
         $batches = ExportPatch::with('company')->get();
         $companies = Company::all();
-        return view('scratch_codes_batches',['batches' => $batches, 'companies' => $companies]);
+
+        return view('scratch_codes_batches', ['batches' => $batches, 'companies' => $companies]);
     }
 
     /**
@@ -33,11 +34,11 @@ class ScratchCodesController extends Controller
         $validated = $request->validate(
             [
                 'number' => 'required|integer|min:1',
-                'company'=> 'required|integer',
-                'type'=> ['string','size:3', new Uppercase]
+                'company' => 'required|integer',
+                'type' => ['string', 'size:3', new Uppercase],
             ]
         );
-        ScratchCode::generateCodes($validated['company'],$validated['number'],$validated['type']);
+        ScratchCode::generateCodes($validated['company'], $validated['number'], $validated['type']);
         // dd($validated);
 
         return redirect()->route('scratch_codes_batches');

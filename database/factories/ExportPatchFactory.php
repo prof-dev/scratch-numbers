@@ -19,7 +19,7 @@ class ExportPatchFactory extends Factory
     {
         return [
             'user_id' => 1,
-            'batch_number' =>$this->faker->unique()->randomNumber(),
+            'batch_number' => $this->faker->unique()->randomNumber(),
             // 'batch_size' =>$this->faker->randomDigitNotNull(),
             'company_id' => Company::factory()->count(1)->create()->first()->id,
         ];

@@ -4,16 +4,15 @@ namespace App\Exports;
 
 use App\Models\ExportPatch;
 use App\Models\ScratchCode;
-use Maatwebsite\Excel\Concerns\FromArray;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class ExportPatchsExport implements WithHeadings , FromCollection
+class ExportPatchsExport implements WithHeadings, FromCollection
 {
-
     protected $batch_id;
 
-    public function __construct(int $batch_id){
+    public function __construct(int $batch_id)
+    {
         // $this->batch = $batch;
         $this->batch_id = $batch_id;
     }
@@ -39,15 +38,16 @@ class ExportPatchsExport implements WithHeadings , FromCollection
 
     public function collection()
     {
-        $codes = ScratchCode::where('export_batch_id',$this->batch_id)->where('deleted_at', '=', null)
+        $codes = ScratchCode::where('export_batch_id', $this->batch_id)->where('deleted_at', '=', null)
         ->get(
             [
                 'code',
                 'status',
                 'export_batch_id',
-                'type'
+                'type',
             ]
-            );
+        );
+
         return $codes;
     }
 }
