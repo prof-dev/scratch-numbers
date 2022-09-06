@@ -9,6 +9,8 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ExportPatchsExport implements WithHeadings, FromCollection
 {
+
+    // need to be revised
     protected $batch_id;
 
     public function __construct(int $batch_id)
