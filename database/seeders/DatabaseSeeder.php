@@ -39,6 +39,24 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('1234567890'),
             'role_id' => 1,
         ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@readandwrite.com',
+            'password' => bcrypt('1234567890'),
+            'role_id' => 2,
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@read.com',
+            'password' => bcrypt('1234567890'),
+            'role_id' => 3,
+        ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@api.com',
+            'password' => bcrypt('1234567890'),
+            'role_id' => 4,
+        ]);
         \App\Models\Company::factory()->create([
             'name' => 'TransSudan',
             'code' => 'TSD',
