@@ -29,13 +29,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware('auth')->group(
     function(){
 
-        Route::get('/company', [App\Http\Controllers\CompanyController::class, 'index'])->name('company');
+        Route::get('/company', [App\Http\Controllers\CompanyController::class, 'index'])->name('company')->can('viewAny', \App\Models\Company::class);
         Route::get('/scratch_codes_batches', [\App\Http\Controllers\ScratchCodesController::class, 'index'])->name('scratch_codes_batches');
         Route::get('/batch_details/{export_patch}', [\App\Http\Controllers\BatchDetailsController::class, 'show'])->name('batch_details');
         Route::get('/batch_details/{export_patch}/export', [\App\Http\Controllers\BatchController::class, 'export'])->name('export_a_batch');
         Route::get('/users' , [\App\Http\Controllers\UserController::class,'index'])->name('users');
 
-        Route::post('/company/create', [App\Http\Controllers\CompanyController::class, 'store'])->name('create_company');
+        Route::post('/company/create', [App\Http\Controllers\CompanyController::class, 'store'])->name('create_company')->can('create',\App\Models\Company::class);
         Route::post('/scratch_codes_batches', [\App\Http\Controllers\ScratchCodesController::class, 'store'])->name('create_batch');
         Route::post('/users/create',[\App\Http\Controllers\UserController::class, 'store'])->name('create_user');
 
