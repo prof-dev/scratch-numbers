@@ -73,8 +73,59 @@ class ScratchCodesController extends Controller
      * @param  \App\Models\ScratchCode  $scratchCode
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ScratchCode $scratchCode)
+    public function destroy(Request $request)
     {
-        //
+        //00 success
+        //01 used
+        //02 notExist
+        //03 notExistForType
+        if($validated = $request->validate(
+            [
+                'Code' => 'required',
+                'Type' => 'required'
+            ]
+        )){
+            if($code = ScratchCode::withTrashed()->where('code', $validated['Code'])->first()){
+                if(strcmp($code['type'], $validated['Type']) == 0){
+                    if($code['deleted_at'] == null){
+                        //softDeletes for the code
+                        $code->delete();
+                        //  code not used and success
+                        return response([
+                            'Code' => $validated['Code'],
+                            'Type' => $validated['Type'],
+                            'StatusCode' => '00'
+                        ]);
+                    }else{
+                        //code is used
+                        return response(
+                            [
+                                'Code' => $validated['Code'],
+                                'Type' => $validated['Type'],
+                                'StatusCode' => '01'
+                            ]
+                        );
+                    }
+                }else{
+                    return response(
+                        [
+                        'Code' => $validated['Code'],
+                        'Type' => $validated['Type'],
+                        'StatusCode' => '03'
+                        ]
+                    );
+                }
+            }
+            else {
+                return response([
+                    'Code' => $validated['Code'],
+                    'Type' => $validated['Type'],
+                    'StatusCode' => '02'
+                ]);
+            }
+        }else{
+            return response(['message' => 'Invalid']);
+        }
+        // ScratchCode::where()->get();
     }
 }
