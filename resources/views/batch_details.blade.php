@@ -26,11 +26,11 @@
                         </div>
 
 
-                        {{-- <div class="flex pt-8 flex-end sm:justify-end sm:pt-0">
-                            <button type="submit" class="text-white bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  rounded-lg text-sm px-4 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 ">
-                                Create Batch
-                            </button>
-                        </div> --}}
+                        <div class="flex pt-8 flex-end sm:justify-end sm:pt-0">
+                            <a href="{{ url('/batch_details/'.$exportPatch->id.'/export') }}" class="text-white bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  rounded-lg text-sm px-4 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 ">
+                                Export This Batch
+                            </a>
+                        </div>
                     {{-- </form> --}}
                 </div>
             </div>
