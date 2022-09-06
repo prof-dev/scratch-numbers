@@ -39,6 +39,5 @@ Route::middleware('auth')->group(
         Route::post('/scratch_codes_batches', [\App\Http\Controllers\ScratchCodesController::class, 'store'])->name('create_batch');
         Route::post('/users/create',[\App\Http\Controllers\UserController::class, 'store'])->name('create_user');
 
-
     }
 );

@@ -7,6 +7,11 @@
 
         <div class="w-full px-6 py-8 mx-auto">
             <div class="px-10 py-6 bg-white rounded-lg shadow-xl">
+                <div class="flex justify-center py-4 px-52">
+                    <div class="text-xl bold">
+                        Bathches Management
+                    </div>
+                </div>
                 <form action="{{ route('create_batch') }}" method="POST">
                     @csrf
                     <div class="row-auto mb-3">
