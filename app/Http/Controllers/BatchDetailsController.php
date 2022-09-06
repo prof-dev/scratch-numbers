@@ -48,15 +48,11 @@ class BatchDetailsController extends Controller
      */
     public function show(ExportPatch $exportPatch)
     {
-        // dd(ExportPatch::with('ScratchCodes')->get());
-        // dd(ScratchCode::where('export_batch_id', $exportPatch->id)->get());
-        // dd($exportPatch);
-        // ;
         return view(
             'batch_details',
             [
                 'exportPatch' => $exportPatch,
-                'company' => Company::find($exportPatch->company_id)->first(),
+                'company' => Company::findOrFail($exportPatch->company_id),
                 'codes' => ScratchCode::where('export_batch_id', $exportPatch->id)->get(),
             ]
         );
