@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\Role::factory()->create([
             'id' => 4,
-            'name' => 'APT_CONSUMER',
+            'name' => 'API_CONSUMER',
         ]);
 
         \App\Models\User::factory()->create([
