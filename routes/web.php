@@ -29,3 +29,4 @@ Route::get('/users' , [\App\Http\Controllers\UserController::class,'index'])->na
 
 Route::post('/company/create', [App\Http\Controllers\CompanyController::class, 'store'])->name('create_company');
 Route::post('/scratch_codes_batches', [\App\Http\Controllers\ScratchCodesController::class, 'store'])->name('create_batch');
+Route::post('/users/create',[\App\Http\Controllers\UserController::class, 'store'])->name('create_user');

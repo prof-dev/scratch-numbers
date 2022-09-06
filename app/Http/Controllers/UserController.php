@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class UserController extends Controller
     {
         return view('users',
         [
-            'companies' => Company::all()
+            'companies' => Company::all(),
+            'roles' => Role::all()
         ]);
     }
 
@@ -29,7 +31,31 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate(
+            [
+                'name' => 'required|string',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:6',
+                'role' => 'required|integer',
+                'company' => 'integer'
+            ]
+        );
+        if(
+            User::create(
+                [
+                    'name' => $validated['name'],
+                    'email' => $validated['email'],
+                    'password' => bcrypt($validated['password']),
+                    'role_id' => $validated['role'],
+                ]
+            )
+        ){
+            return redirect()->route('users');
+        }
+        else{
+            abort('500');
+        }
+        // dd($validate);
     }
 
     /**
