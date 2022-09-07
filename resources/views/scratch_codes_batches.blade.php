@@ -89,39 +89,80 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($batches as $batch)
-                            <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <td  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                    {{ $batch->id }}
-                                </td>
+                        @if ($batches->count() > 0)
+                            @foreach($batches as $batch)
+                                <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{ $batch->id }}
+                                    </td>
 
-                                <td class="px-6 py-4">
-                                    {{ $batch->company->name }}
-                                    code
-                                </td>
+                                    <td class="px-6 py-4">
+                                        {{ $batch->company->name }}
+                                        code
+                                    </td>
 
-                                <td class="px-6 py-4">
-                                    {{ $batch->numberOfScratchCodes() }}
-                                </td>
+                                    <td class="px-6 py-4">
+                                        {{ $batch->numberOfScratchCodes() }}
+                                    </td>
 
-                                <td class="px-6 py-4 border-l-2">
-                                    {{-- {{ $company->code }} --}}
-                                    <div class="flex">
-                                        <div class="flex items-center justify-between w-full">
-                                            <a href="{{ url('batch_details/'.$batch->id) }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
-                                                Details
-                                            </a>
-                                            <a href="{{ url('batch_details/'.$batch->id.'/export') }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
-                                                Export
-                                            </a>
-                                            <a class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
-                                                Delete
-                                            </a>
+                                    <td class="px-6 py-4 border-l-2">
+                                        {{-- {{ $company->code }} --}}
+                                        <div class="flex">
+                                            <div class="flex items-center justify-between w-full">
+                                                <a href="{{ url('batch_details/'.$batch->id) }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
+                                                    Details
+                                                </a>
+                                                <a href="{{ url('batch_details/'.$batch->id.'/export') }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
+                                                    Export
+                                                </a>
+                                                <a class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
+                                                    Delete
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
+                                    </td>
+                                </tr>
+                            @endforeach
+
+                            @else
+
+                                {{-- @foreach($batches as $batch) --}}
+                                <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                    <td  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                        {{-- {{ $batch->id }} --}}
+                                        {{ __('No Codes Available') }}
+                                    </td>
+
+                                    <td class="px-6 py-4">
+                                        {{-- {{ $batch->company->name }} --}}
+                                        {{ __('No Codes Available') }}
+                                        code
+                                    </td>
+
+                                    <td class="px-6 py-4">
+                                        {{-- {{ $batch->numberOfScratchCodes() }} --}}
+                                        {{ __('No Codes Available') }}
+                                    </td>
+
+                                    <td class="px-6 py-4 border-l-2">
+                                        {{-- {{ $company->code }} --}}
+                                        <div class="flex">
+                                            <div class="flex items-center justify-between w-full">
+                                                <a href="#" class="inline-flex items-center text-gray-600 cursor-not-allowed underline disabled">
+                                                    {{ __('No Details') }}
+                                                </a>
+                                                <a href="3" class="inline-flex items-center text-gray-600 cursor-not-allowed underline disabled">
+                                                    {{ __('Cant Export') }}
+                                                </a>
+                                                <a class="inline-flex items-center text-gray-600 cursor-not-allowed underline disabled">
+                                                    {{ __('Cant Delete Delete') }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {{-- @endforeach --}}
+                        @endif
                     </tbody>
                 </table>
             </div>
