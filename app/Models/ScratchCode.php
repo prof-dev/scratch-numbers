@@ -28,10 +28,11 @@ class ScratchCode extends Model
         $company = Company::find($company);
 
         $lastBatch = ExportPatch::all('batch_number')->last();
+        $number=$lastBatch==null?0: $lastBatch->batch_number ;
         $batch = ExportPatch::create(
             [
-                'user_id' => current_user()->id,
-                'batch_number' => $lastBatch->batch_number + 1,
+                'user_id' => auth()->user()->id,
+                'batch_number' => $number + 1,
                 'company_id' => $company->id,
             ]
         );

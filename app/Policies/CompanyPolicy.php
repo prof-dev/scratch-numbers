@@ -19,7 +19,9 @@ class CompanyPolicy
      */
     public function viewAny(User $user)
     {
-        return current_user()->role_id == Role::IS_ADMIN;
+        // return auth()->user()->role_id == Role::IS_ADMIN;
+        return auth()->user()->role_id == Role::IS_ADMIN;
+
     }
 
     /**
@@ -42,7 +44,7 @@ class CompanyPolicy
      */
     public function create(User $user)
     {
-        return current_user()->role_id == Role::IS_ADMIN;
+        return auth()->user()->role_id == Role::IS_ADMIN;
     }
 
     /**

@@ -1,6 +1,6 @@
 <?php
 
-function current_user()
+function auth()->user()
 {
     return auth()->user();
 }
