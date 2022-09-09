@@ -85,7 +85,7 @@ class ScratchCodesController extends Controller
                 'Type' => 'required'
             ]
         )){
-            if($code = ScratchCode::withTrashed()->where('code', $validated['Code'])->first()){
+            if($code = ScratchCode::withoutTrashed()->where('code', $validated['Code'])->first()){
                 if(strcmp($code['type'], $validated['Type']) == 0){
                     if($code['deleted_at'] == null){
                         //softDeletes for the code
@@ -94,7 +94,8 @@ class ScratchCodesController extends Controller
                         return response([
                             'Code' => $validated['Code'],
                             'Type' => $validated['Type'],
-                            'StatusCode' => '00'
+                            'StatusCode' => '00',
+                            'StatusMessage'=>'Success'
                         ]);
                     }else{
                         //code is used
@@ -102,7 +103,8 @@ class ScratchCodesController extends Controller
                             [
                                 'Code' => $validated['Code'],
                                 'Type' => $validated['Type'],
-                                'StatusCode' => '01'
+                                'StatusCode' => '01',
+                                'StatusMessage'=>'Code Already Used'
                             ]
                         );
                     }
@@ -111,7 +113,8 @@ class ScratchCodesController extends Controller
                         [
                         'Code' => $validated['Code'],
                         'Type' => $validated['Type'],
-                        'StatusCode' => '03'
+                        'StatusCode' => '03',
+                        'StatusMessage'=>'not exist with selected type'
                         ]
                     );
                 }
@@ -120,7 +123,8 @@ class ScratchCodesController extends Controller
                 return response([
                     'Code' => $validated['Code'],
                     'Type' => $validated['Type'],
-                    'StatusCode' => '02'
+                    'StatusCode' => '02',
+                    'StatusMessage'=>'Code Does Not Exist'
                 ]);
             }
         }else{
