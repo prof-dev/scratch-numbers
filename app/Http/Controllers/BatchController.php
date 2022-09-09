@@ -19,11 +19,11 @@ class BatchController extends Controller
                 'status',
                 'export_batch_id',
                 'type',
-            ]
+            ]   
         );
         if ($codes->isNotEmpty()) {
             // $export = ;
-            return Excel::download(new ExportPatchsExport($exportPatch->id), 'Clients.xlsx');
+            return Excel::download(new ExportPatchsExport($exportPatch->id), 'Batch_'.$exportPatch->company->code.'_'. $exportPatch->id.'.xlsx');
         }
 
         return redirect()->route('scratch_codes_batches');

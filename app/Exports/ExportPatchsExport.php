@@ -5,9 +5,12 @@ namespace App\Exports;
 use App\Models\ExportPatch;
 use App\Models\ScratchCode;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class ExportPatchsExport implements WithHeadings, FromCollection
+class ExportPatchsExport implements WithHeadings, FromCollection, ShouldAutoSize, WithEvents
 {
 
     // need to be revised
@@ -51,5 +54,29 @@ class ExportPatchsExport implements WithHeadings, FromCollection
         );
 
         return $codes;
+    }
+
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function (AfterSheet $event) {
+                $cellRange = 'A1:E1'; // All headers
+                $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(14);
+
+                $styleArray = [
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THICK,
+                            'color' => ['argb' => 'FFFF0000'],
+                        ],
+                    ],
+
+                    'alignment' => [
+                        'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_RIGHT,
+                    ],
+                ];
+            },
+        ];
     }
 }
