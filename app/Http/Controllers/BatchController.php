@@ -19,7 +19,7 @@ class BatchController extends Controller
                 'status',
                 'export_batch_id',
                 'type',
-            ]   
+            ]
         );
         if ($codes->isNotEmpty()) {
             // $export = ;
