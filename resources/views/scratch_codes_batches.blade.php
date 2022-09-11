@@ -115,9 +115,18 @@
                                                 <a href="{{ url('batch_details/'.$batch->id.'/export') }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                     Export
                                                 </a>
-                                                <a class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
-                                                    Delete
-                                                </a>
+                                                <form action="{{ route('delete_batch',$batch->id) }}" method="POST">
+                                                    @csrf
+                                                    @method("DELETE")
+                                                    <button type="submit" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
+                                                        Delete
+                                                    </button>
+                                                    @error('batch_has_codes_'.$batch->id)
+                                                        <span class="text-red-600" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </form>
                                             </div>
                                         </div>
                                     </td>
@@ -151,10 +160,10 @@
                                                 <a href="#" class="inline-flex items-center text-gray-600 cursor-not-allowed underline disabled">
                                                     {{ __('No Details') }}
                                                 </a>
-                                                <a href="3" class="inline-flex items-center text-gray-600 cursor-not-allowed underline disabled">
+                                                <a href="#" class="inline-flex items-center text-gray-600 cursor-not-allowed underline disabled">
                                                     {{ __('Cant Export') }}
                                                 </a>
-                                                <a class="inline-flex items-center text-gray-600 cursor-not-allowed underline disabled">
+                                                <a href="#" class="inline-flex items-center text-gray-600 cursor-not-allowed underline disabled">
                                                     {{ __('Cant Delete Delete') }}
                                                 </a>
                                             </div>

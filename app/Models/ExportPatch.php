@@ -32,6 +32,11 @@ class ExportPatch extends Model
         return ScratchCode::where('export_batch_id', $this->id)->get()->count();
     }
 
+    public function hasUsed(){
+        //check if there are any used scratch codes for this export batch
+        return ScratchCode::where('export_batch_id', $this->id)->where('status', 1)->get()->isNotEmpty();
+    }
+
     public function getRouteKey()
     {
         return 'id';

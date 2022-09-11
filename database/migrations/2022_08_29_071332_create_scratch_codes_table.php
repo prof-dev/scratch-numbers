@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('code', 9)->unique(); // $company code . random number
             $table->tinyInteger('status')->default(0); // used or not used 1 for used 0 for not used
             $table->string('type', 3); //like INT , SDN , KSA ....
-            $table->foreignId('export_batch_id')->constrained()->default(0); // batch identify
+            $table->unsignedBigInteger('export_batch_id')->nullable()->default(0);
+            $table->foreign('export_batch_id')->references('id')->on('export_batches')->cascadeOnDelete();
+            // $table->foreignId('export_batch_id')->constrained()->default(0); // batch identify
             $table->timestamps();
             $table->softDeletes();
         });

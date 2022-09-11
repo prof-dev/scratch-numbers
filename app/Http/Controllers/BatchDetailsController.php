@@ -89,6 +89,15 @@ class BatchDetailsController extends Controller
      */
     public function destroy(ExportPatch $exportPatch)
     {
-        //
+        // dd($exportPatch->hasUsed());
+        //if this batch doesn't has used codes you can delete
+        if(!$exportPatch->hasUsed()){
+            $exportPatch->delete();
+            return redirect()->back();
+        }
+        else{
+            // else if it has used codes you cant delete it
+            return redirect()->back()->withErrors(['batch_has_codes_'.$exportPatch->id => "Can't delete this export patch"]);
+        }
     }
 }
