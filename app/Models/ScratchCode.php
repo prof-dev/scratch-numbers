@@ -27,7 +27,7 @@ class ScratchCode extends Model
         //find the company with this id
         $company = Company::find($company);
 
-        $lastBatch = ExportPatch::all('batch_number')->last();
+        $lastBatch = ExportPatch::where('company_id', $company->id)->get()->last();
         $number=$lastBatch==null?0: $lastBatch->batch_number ;
         $batch = ExportPatch::create(
             [
