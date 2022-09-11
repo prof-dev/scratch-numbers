@@ -112,7 +112,7 @@
                                                 <a href="{{ url('batch_details/'.$batch->id) }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                     Details
                                                 </a>
-                                                <a href="{{ url('batch_details/'.$batch->id.'/export') }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
+                                                <a id="delete" href="javascript:void(0)" data-id="{{ $batch->id }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                     Export
                                                 </a>
                                                 <form action="{{ route('delete_batch',$batch->id) }}" method="POST">
@@ -178,4 +178,29 @@
     </div>
 </div>
 
+<Script>
+    // delete button click
+    $('#delete').click(function() {
+        const id = $(this).data('id');
+
+        if (id) {
+            // const result = window.confirm('Do you want to delete?');
+            // if (result) {
+                $.ajax({
+                    url: `/batch_details/${id}/export`,
+                    type: 'GET',
+                    success: function(response) {
+                        if (response && response.status === 'success') {
+                            const data = response.data;
+                            // $(`#post_${data.id}`).remove();
+                        }
+                    }
+                });
+            }
+            else {
+                console.log('error', 'Post not found');
+            }
+        // }
+    });
+</Script>
 @endsection
