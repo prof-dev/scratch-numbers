@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Models\ExportPatch;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -75,6 +76,17 @@ class CompanyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //check if the resource exists
+        if(ExportPatch::where('company_id', $id)->get()->isEmpty()){
+            //delete the resource from the database
+            Company::where('id', $id)->delete();
+            //redirect back to company view
+            return redirect()->back();
+        }
+        else{
+            // return with error messages
+            return redirect()->route('company')->withErrors(['company_has_batches'.$id=>'Can\'t delete this company it has batches']);
+        }
+        // return
     }
 }

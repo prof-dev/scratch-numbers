@@ -60,8 +60,11 @@
                             <th scope="col" class="px-6 py-3">
                                 # Users In Company
                             </th>
-                            {{-- <th scope="col" class="px-6 py-3 text-center">
+                            <th scope="col" class="px-6 py-3 text-center">
                                 Action
+                            </th>
+                            {{-- <th scope="col" class="px-6 py-3 text-center">
+                                Errors
                             </th> --}}
                         </tr>
                     </thead>
@@ -74,9 +77,18 @@
                                 <td class="px-6 py-4">
                                     {{ $company->code }}
                                 </td>
-                                {{-- <td class="px-6 py-4 text-center">
-                                    <a href="#" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
-                                </td> --}}
+                                <td class="px-6 py-4 text-center">
+                                    <form action="{{ route('delete_company',$company->id) }}" method="POST">
+                                        @method("DELETE")
+                                        @csrf
+                                        <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete</button>
+                                        @error('company_has_batches'.$company->id)
+                                            <span class="text-red-600" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
