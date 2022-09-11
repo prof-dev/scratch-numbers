@@ -79,15 +79,19 @@ class ScratchCodesController extends Controller
         //01 used
         //02 notExist
         //03 notExistForType
+        //check validated request
         if($validated = $request->validate(
             [
                 'Code' => 'required',
                 'Type' => 'required'
             ]
         )){
-            if($code = ScratchCode::withoutTrashed()->where('code', $validated['Code'])->first()){
+            //check if the scratch code exists
+            if($code = ScratchCode::withTrashed()->where('code', $validated['Code'])->first()){
+                //check if it is from the same type
                 if(strcmp($code['type'], $validated['Type']) == 0){
-                    if($code['deleted_at'] == null){
+                    //check if it is used
+                    if($code['deleted_at'] == null && $code['status'] == 0){
                         //softDeletes for the code
                         $code->delete();
                         //  code not used and success
