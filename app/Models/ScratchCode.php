@@ -22,13 +22,18 @@ class ScratchCode extends Model
         return $this->belongsTo('App\Models\ScratchCodeExport');
     }
 
+
+    // method to generate a batch codes
     public static function generateCodes($company, $numberOfCodes, $type)
     {
         //find the company with this id
         $company = Company::find($company);
 
+        //find the last batch for each company
         $lastBatch = ExportPatch::where('company_id', $company->id)->get()->last();
-        $number=$lastBatch==null?0: $lastBatch->batch_number ;
+        // if the last batch is empty
+        $number=$lastBatch==null?0: $lastBatch->batch_number;
+
         $batch = ExportPatch::create(
             [
                 'user_id' => auth()->user()->id,
@@ -52,6 +57,7 @@ class ScratchCode extends Model
         }
     }
 
+    // a method to create batch codes
     private static function createOneCode($company)
     {
         //create random number
@@ -69,6 +75,7 @@ class ScratchCode extends Model
         return $code;
     }
 
+    //find if the code exists in the database
     private static function codeExists($code)
     {
         //find a non used code for this company
