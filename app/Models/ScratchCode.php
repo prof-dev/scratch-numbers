@@ -36,7 +36,7 @@ class ScratchCode extends Model
 
         $batch = ExportPatch::create(
             [
-                'user_id' => auth()->user()->id,
+                'user_id' => current_user()->id,
                 'batch_number' => $number + 1,
                 'company_id' => $company->id,
             ]
