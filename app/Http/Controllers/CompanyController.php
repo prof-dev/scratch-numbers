@@ -30,7 +30,7 @@ class CompanyController extends Controller
         $validated = $request->validate(
             [
                 'name' => 'required',
-                'code' => 'required|unique:companies|string|min:3',
+                'code' => 'required|unique:companies|string|size:3',
             ]
         );
 
