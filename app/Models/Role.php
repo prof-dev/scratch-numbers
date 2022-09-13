@@ -25,4 +25,8 @@ class Role extends Model
     public const IS_READ = 3;
 
     public const IS_API_CONSUMER = 4;
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
 }
