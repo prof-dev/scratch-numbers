@@ -112,9 +112,9 @@
                                                 <a href="{{ url('batch_details/'.$batch->id) }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                     Details
                                                 </a>
-                                                <a id="delete" href="javascript:void(0)" data-id="{{ $batch->id }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
+                                                <button id="delete" onclick="downloadExcel({{$batch->id}})" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                     Export
-                                                </a>
+                                                </button>
                                                 <form action="{{ route('delete_batch',$batch->id) }}" method="POST">
                                                     @csrf
                                                     @method("DELETE")
@@ -177,4 +177,30 @@
             </div>
     </div>
 </div>
+
+<script>
+
+    function downloadExcel(url,code){
+url="127.0.0.1:8000/batch_details/"+url+"/export"
+fetch(url)
+  .then(resp => resp.blob())
+  .then(blob => {
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;   
+    // the filename you want
+    a.download ="batch_download.xlsx";
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    alert('your file has downloaded!'); // or you know, something with better UX...
+  })
+  .catch(() => alert('oh no!'));
+    }
+</script>
 @endsection
+
+@push('head')
+
+@endpush
