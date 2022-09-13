@@ -14,4 +14,16 @@ class Company extends Model
     protected $guarded = [];
 
     protected $primaryKey = 'id';
+
+    public function exportBatches(){
+        return $this->hasMany(ExportPatch::class);
+    }
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
+
+    public function scratchCodes(){
+        return $this->hasManyThrough(ScratchCode::class,ExportPatch::class, 'company_id', 'export_batch_id');
+    }
 }
