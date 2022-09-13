@@ -21,7 +21,9 @@ class ExportPatch extends Model
     {
         return $this->belongsTo(Company::class);
     }
-
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function ScratchCodes()
     {
         return $this->hasMany(ScratchCode::class, 'id', 'export_batch_id');
