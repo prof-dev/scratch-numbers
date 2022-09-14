@@ -59,7 +59,10 @@
                                 {{-- <a id="navbarDropdown" class="text-sm font-medium text-gray-600 dark:text-blue-500" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a> --}}
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="" aria-labelledby="navbarDropdown">
+                                    {{-- <a class="text-sm font-medium text-gray-600 dark:text-gray-500 dark:hover:text-gray-500 hover:text-gray-700" >
+                                            {{ current_user()->email }}
+                                    </a> --}}
                                     @if (Route::current()->getName() == 'home')
                                         <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
