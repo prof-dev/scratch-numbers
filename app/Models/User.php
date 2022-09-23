@@ -50,4 +50,11 @@ class User extends Authenticatable
     public function company(){
         return $this->belongsTo(Company::class);
     }
+
+    public function getUserScratchCodes(){
+        return $this->company->scratchCodes;
+    }
+    public function getUserExportBatches(){
+        return $this->company->exportBatches;
+    }
 }
