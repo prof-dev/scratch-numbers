@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GenerateRequest;
+use App\Http\Resources\GenerateResponse;
 use App\Models\Company;
 use App\Models\ExportPatch;
 use App\Models\ScratchCode;
@@ -63,7 +64,7 @@ class ScratchCodesController extends Controller
        $scratchCodes= ScratchCode::generateCodes(current_user()->company_id, $request->number, $request->type);
         // dd($validated);
 
-        return response()->json(["data"=>$scratchCodes],200);
+        return response()->json(["data"=>GenerateResponse::collection($scratchCodes)],200);
     }
     
 
