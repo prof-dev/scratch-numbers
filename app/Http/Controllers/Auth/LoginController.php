@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -36,5 +39,55 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+
+    /**
+     * Login an api user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function apiLogin(Request $request){
+        $validated = $request->validate(
+            [
+                'email' => 'required|string',
+                'password' => 'required|string',
+            ]
+        );
+
+        // find user with email
+        if($user = $this->findUserByEmail($validated['email'])){
+
+            // check if password is correct
+            if(Hash::check($validated['password'], $user->password)){
+                return response()->json(
+                    [
+                        'token' => $user->createToken('api-token')->plainTextToken,
+                    ], 201);
+            } else{
+                // password is invalid
+            return response()->json([
+                'password' => 'password incorrect'
+            ], 200);
+            }
+        }
+        else{
+            // email is invalid
+            return response()->json([
+                'email' => 'email dosn\'t exist'
+            ], 200);
+        }
+
+    }
+
+    /**
+     * find the user by email
+     *
+     * @param  String $email
+     * @return \App\Models\User
+     */
+    public function findUserByEmail($email){
+        return User::where('email', $email)->first();
     }
 }
