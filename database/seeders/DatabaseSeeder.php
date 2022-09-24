@@ -61,5 +61,12 @@ class DatabaseSeeder extends Seeder
             'name' => 'TransSudan',
             'code' => 'TSD',
         ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@company.com',
+            'password' => bcrypt('1234567890'),
+            'role_id' => 2,
+            'company_id' => 1
+        ]);
     }
 }
