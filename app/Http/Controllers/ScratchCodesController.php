@@ -17,8 +17,18 @@ class ScratchCodesController extends Controller
      */
     public function index()
     {
-        $batches = ExportPatch::with('company')->get();
+        
+        if(current_user()->company==Company::where("name","IshraqGroup")->first()&&current_user()->role==1){
+            $batches = ExportPatch::with('company')->get();
         $companies = Company::all();
+
+
+        }
+        else{
+            $batches = ExportPatch::with('company')->where("company_id",current_user()->company_id)->get();
+            $companies = Company::where("id",current_user()->company_id)->get();
+
+        }
 
         return view('scratch_codes_batches', ['batches' => $batches, 'companies' => $companies]);
     }
