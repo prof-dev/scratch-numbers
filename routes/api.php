@@ -14,11 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::middleware('auth:sanctum')->group(
+    function(){
+        Route::post('/consume',[\App\Http\Controllers\ScratchCodesController::class,'destroy'])->name('consume');
+        Route::post('/generate',[\App\Http\Controllers\ScratchCodesController::class,'generateJsonBatch'])->name('generate');
+    }
+);
 
 Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'apiLogin']);
 
-Route::post('/consume',[\App\Http\Controllers\ScratchCodesController::class,'destroy'])->name('consume');
-Route::post('/generate',[\App\Http\Controllers\ScratchCodesController::class,'generateJsonBatch'])->name('generate');

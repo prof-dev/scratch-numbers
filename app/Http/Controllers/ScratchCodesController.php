@@ -20,7 +20,7 @@ class ScratchCodesController extends Controller
      */
     public function index()
     {
-        
+
         if(current_user()->company==Company::where("name","IshraqGroup")->first()&&current_user()->role==1){
             $batches = ExportPatch::with('company')->get();
         $companies = Company::all();
@@ -60,13 +60,13 @@ class ScratchCodesController extends Controller
 
     public function generateJsonBatch(GenerateRequest $request)
     {
-        
+
        $scratchCodes= ScratchCode::generateCodes(current_user()->company_id, $request->number, $request->type);
         // dd($validated);
 
         return response()->json(["data"=>GenerateResponse::collection($scratchCodes)],200);
     }
-    
+
 
     /**
      * Display the specified resource.
