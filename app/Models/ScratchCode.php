@@ -29,6 +29,8 @@ class ScratchCode extends Model
         //find the company with this id
         $company = Company::find($company);
 
+        $allCreatedcodes=[];
+
         //find the last batch for each company
         $lastBatch = ExportPatch::where('company_id', $company->id)->get()->last();
         // if the last batch is empty
@@ -46,6 +48,7 @@ class ScratchCode extends Model
             //create one
             $code = ScratchCode::createOneCode($company);
             //add the code to the database
+            $allCreatedcodes[$i]=
             ScratchCode::create(
                 [
                     'code' => $code,
@@ -55,6 +58,7 @@ class ScratchCode extends Model
                 ]
             );
         }
+        return $allCreatedcodes;
     }
 
     // a method to create batch codes

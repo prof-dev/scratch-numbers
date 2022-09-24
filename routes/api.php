@@ -19,3 +19,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/consume',[\App\Http\Controllers\ScratchCodesController::class,'destroy'])->name('consume');
+Route::post('/generate',[\App\Http\Controllers\ScratchCodesController::class,'generateJsonBatch'])->name('generate');

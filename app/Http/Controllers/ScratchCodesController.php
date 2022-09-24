@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GenerateRequest;
 use App\Models\Company;
 use App\Models\ExportPatch;
 use App\Models\ScratchCode;
 use App\Rules\Uppercase;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ScratchCodesController extends Controller
 {
@@ -53,6 +55,17 @@ class ScratchCodesController extends Controller
 
         return redirect()->route('scratch_codes_batches');
     }
+
+
+    public function generateJsonBatch(GenerateRequest $request)
+    {
+        
+       $scratchCodes= ScratchCode::generateCodes(current_user()->company_id, $request->number, $request->type);
+        // dd($validated);
+
+        return response()->json(["data"=>$scratchCodes],200);
+    }
+    
 
     /**
      * Display the specified resource.
