@@ -49,18 +49,13 @@ class LoginController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function apiLogin(Request $request){
-        $validated = $request->validate(
-            [
-                'email' => 'required|string',
-                'password' => 'required|string',
-            ]
-        );
+      
 
         // find user with email
-        if($user = $this->findUserByEmail($validated['email'])){
+        if($user = $this->findUserByEmail($request->email)){
 
             // check if password is correct
-            if(Hash::check($validated['password'], $user->password)){
+            if(Hash::check($request->password, $user->password)){
                 return response()->json(
                     [
                         'token' => $user->createToken('api-token')->plainTextToken,
