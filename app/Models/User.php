@@ -60,10 +60,12 @@ class User extends Authenticatable
         return $this->company->exportBatches;
     }
 
+    //method to destroy All Tokens
     public function destroyAllTokens(){
         return $this->tokens()->delete();
     }
 
+    //method to destroy One Token
     public function destroyToken(){
         return $this->currentAccessToken()->delete();
     }
