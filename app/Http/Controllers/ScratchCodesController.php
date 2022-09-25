@@ -21,7 +21,7 @@ class ScratchCodesController extends Controller
     public function index()
     {
 
-        if(current_user()->company==Company::where("name","IshraqGroup")->first()&&current_user()->role==1){
+        if(current_user()->company==Company::where("name","IshraqGroup")->first()&&current_user()->role_id==1){
             $batches = ExportPatch::with('company')->get();
         $companies = Company::all();
 
