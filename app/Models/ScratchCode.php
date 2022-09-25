@@ -15,6 +15,7 @@ class ScratchCode extends Model
         'type',
         'status',
         'export_batch_id',
+        'bar_code'
     ];
 
     public function ExportPatch()
@@ -55,6 +56,7 @@ class ScratchCode extends Model
                     'type' => $type,
                     'status' => false,
                     'export_batch_id' => $batch->id,
+                    'bar_code' => time() . substr( $code, 3)
                 ]
             );
         }
