@@ -55,7 +55,16 @@ class User extends Authenticatable
     public function getUserScratchCodes(){
         return $this->company->scratchCodes;
     }
+
     public function getUserExportBatches(){
         return $this->company->exportBatches;
+    }
+
+    public function destroyAllTokens(){
+        return $this->tokens()->delete();
+    }
+
+    public function destroyToken(){
+        return $this->currentAccessToken()->delete();
     }
 }
