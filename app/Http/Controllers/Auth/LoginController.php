@@ -67,16 +67,16 @@ class LoginController extends Controller
                     ], 201);
             } else{
                 // password is invalid
-            return response()->json([
-                'password' => 'password incorrect'
-            ], 200);
+                return response()->json([
+                    'email' => 'email or password dosn\'t exist or not correct'
+                ], 401);
             }
         }
         else{
             // email is invalid
             return response()->json([
-                'email' => 'email dosn\'t exist'
-            ], 200);
+                'email' => 'email or password dosn\'t exist or not correct'
+            ], 401);
         }
 
     }
