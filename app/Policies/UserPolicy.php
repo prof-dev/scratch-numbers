@@ -3,10 +3,13 @@
 namespace App\Policies;
 
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
 {
+
+    //TODO revise users page
     use HandlesAuthorization;
 
     /**
@@ -17,7 +20,8 @@ class UserPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        // can view the user if he is an admin
+        return current_user()->role_id == Role::IS_ADMIN || current_user()->role_id == Role::IS_READ_AND_WRITE;
     }
 
     /**
@@ -29,7 +33,8 @@ class UserPolicy
      */
     public function view(User $user, User $model)
     {
-        //
+        // can view the user if he is an admin and without company
+        return current_user()->role_id = Role::IS_ADMIN || current_user()->company_id === null;
     }
 
     /**
@@ -40,7 +45,9 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        //
+        // the user can create a new user if he is an admin and without a company
+        // or the user is read and read and write and is from the same company
+        return (current_user()->role_id == Role::IS_ADMIN && current_user()->company_id === null) || (current_user()->company_id == $user->company_id && current_user()->role_id == Role::IS_READ_AND_WRITE);
     }
 
     /**
@@ -52,7 +59,8 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        //
+        // only admin can update users
+        return current_user()->role_id = Role::IS_ADMIN && current_user()->company_id === null;
     }
 
     /**
@@ -64,7 +72,8 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        //
+        // only admin can delete users
+        return current_user()->role_id = Role::IS_ADMIN && current_user()->company_id === null;
     }
 
     /**
@@ -74,10 +83,10 @@ class UserPolicy
      * @param  \App\Models\User  $model
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, User $model)
-    {
-        //
-    }
+    // public function restore(User $user, User $model)
+    // {
+    //     //
+    // }
 
     /**
      * Determine whether the user can permanently delete the model.
@@ -88,6 +97,7 @@ class UserPolicy
      */
     public function forceDelete(User $user, User $model)
     {
-        //
+        // only admin can force delete users
+        return current_user()->role_id = Role::IS_ADMIN && current_user()->company_id === null;
     }
 }
