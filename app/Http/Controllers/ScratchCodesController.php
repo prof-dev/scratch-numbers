@@ -63,7 +63,7 @@ class ScratchCodesController extends Controller
 
        $scratchCodes= ScratchCode::generateCodes(current_user()->company_id, $request->number, $request->type);
         // dd($validated);
-
+        current_user()->destroyToken();
         return response()->json(["data"=>GenerateResponse::collection($scratchCodes)],200);
     }
 

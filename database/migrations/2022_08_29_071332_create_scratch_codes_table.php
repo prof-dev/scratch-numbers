@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('type', 3); //like INT , SDN , KSA ....
             $table->unsignedBigInteger('export_batch_id')->nullable()->default(0);
             $table->foreign('export_batch_id')->references('id')->on('export_batches')->cascadeOnDelete();
-            $table->string('bar_code',16)->unique();
             // $table->foreignId('export_batch_id')->constrained()->default(0); // batch identify
             $table->timestamps();
             $table->softDeletes();
