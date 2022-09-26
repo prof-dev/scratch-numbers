@@ -8,6 +8,8 @@ use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
 {
+
+    //TODO revise users page
     use HandlesAuthorization;
 
     /**
@@ -19,7 +21,7 @@ class UserPolicy
     public function viewAny(User $user)
     {
         // can view the user if he is an admin
-        return current_user()->role_id == Role::IS_ADMIN;
+        return current_user()->role_id == Role::IS_ADMIN || current_user()->role_id == Role::IS_READ_AND_WRITE;
     }
 
     /**

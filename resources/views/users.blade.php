@@ -85,7 +85,7 @@
 
                         <div class="row-auto mb-3">
                             <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Company') }}</label>
-                            <select @if (current_user()->company_id == null) disabled @endif id="company" name="company" required class="@if (current_user()->company_id == null) bg-gray-300 @else bg-gray-50 @endif  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            <select @if (!current_user()->company_id == null) disabled @endif id="company" name="company" required class="@if (current_user()->company_id == null) bg-gray-300 @else bg-gray-50 @endif  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 @if (current_user()->company_id == null)
                                 <option selected>Choose a company</option>
                                     @foreach($companies as $company)
