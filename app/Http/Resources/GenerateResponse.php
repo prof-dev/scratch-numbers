@@ -19,6 +19,7 @@ class GenerateResponse extends JsonResource
                 "type" => $this->type,
                 "batch_id" => $this->export_batch_id,
                 "created_at" => $this->created_at,
+                "serial_number" => $this->bar_code,
             ];
     }
 }
