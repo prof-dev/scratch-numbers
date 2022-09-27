@@ -15,7 +15,11 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        $companies = Company::all();
+        if(!isIshraqAdmin()){
+        return view('home');
+            
+        }
+        $companies =isIshraqAdmin()? Company::all():Company::where("id",current_user()->company_id)->get();
 
         return view('company', ['companies' => $companies]);
     }

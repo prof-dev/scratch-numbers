@@ -85,8 +85,8 @@
 
                         <div class="row-auto mb-3">
                             <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">{{ __('Company') }}</label>
-                            <select @if (!current_user()->company_id == null) disabled @endif id="company" name="company" required class="@if (current_user()->company_id == null) bg-gray-300 @else bg-gray-50 @endif  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                @if (current_user()->company_id == null)
+                            <select @if (!@isIshraqAdmin()) disabled @endif id="company" name="company" required class="@if (@isIshraqAdmin()) bg-gray-300 @else bg-gray-50 @endif  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                @if (@isIshraqAdmin())
                                 <option selected>Choose a company</option>
                                     @foreach($companies as $company)
                                         @if (old('company') == $company->id)
@@ -130,7 +130,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (current_user()->company_id == null)
+                        @if (@isIshraqAdmin())
                             @foreach($companies as $company)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
