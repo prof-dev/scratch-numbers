@@ -16,9 +16,11 @@ class UserController extends Controller
      */
     public function index()
     {
+        $companies=isIshraqAdmin()? Company::all():Company::where("id",current_user()->company_id)->get();
+        // dd($companies);
         return view('users',
         [
-            'companies' => Company::all(),
+            'companies' =>$companies,
             'roles' => Role::all()
         ]);
     }
