@@ -105,7 +105,7 @@ class ScratchCodesController extends Controller
         //02 notExist
         //03 notExistForType
         //check validated request
-        $apiToken = $request->header('x-api-key');
+        $apiToken = $request->header('Authorization-Token');
         if($apiToken!=="3fXeVRRTYAg4KUaE6fGoSAcXsYqDtvfYPSWWgAiW"){
             return response()->json(["message"=>"UnAuthorized"],401);
         }
