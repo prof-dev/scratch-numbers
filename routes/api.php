@@ -20,6 +20,7 @@ Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'apiLo
 
 Route::middleware('auth:sanctum')->group(
     function(){
-        Route::post('/consume',[\App\Http\Controllers\ScratchCodesController::class,'destroy'])->name('consume');
-        Route::post('/generate',[\App\Http\Controllers\ScratchCodesController::class,'generateJsonBatch'])->name('generate');
+    Route::post('/generate',[\App\Http\Controllers\ScratchCodesController::class,'generateJsonBatch'])->name('generate');
+
     });
+    Route::post('/consume',[\App\Http\Controllers\ScratchCodesController::class,'destroy'])->name('consume');

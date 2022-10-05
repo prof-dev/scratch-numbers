@@ -99,11 +99,16 @@ class ScratchCodesController extends Controller
      */
     public function destroy(Request $request)
     {
+
         //00 success
         //01 used
         //02 notExist
         //03 notExistForType
         //check validated request
+        $apiToken = $request->header('x-api-key');
+        if($apiToken!=="3fXeVRRTYAg4KUaE6fGoSAcXsYqDtvfYPSWWgAiW"){
+            return response()->json(["message"=>"UnAuthorized"],401);
+        }
         if($validated = $request->validate(
             [
                 'Code' => 'required',
