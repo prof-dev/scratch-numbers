@@ -15,7 +15,8 @@ class ScratchCode extends Model
         'type',
         'status',
         'export_batch_id',
-        'bar_code'
+        'bar_code',
+        'consumed_by'
     ];
 
     public function ExportPatch()

@@ -112,7 +112,7 @@ class ScratchCodesController extends Controller
         if($validated = $request->validate(
             [
                 'Code' => 'required',
-                'Type' => 'required'
+                'Type' => 'required',
             ]
         )){
             //check if the scratch code exists
@@ -120,9 +120,13 @@ class ScratchCodesController extends Controller
                 //check if it is from the same type
                 if(strcmp($code['type'], $validated['Type']) == 0){
                     //check if it is used
-                    if($code['deleted_at'] == null && $code['status'] == 0){
+                    if( $code['status'] == 0){
                         //softDeletes for the code
-                        $code->delete();
+                        $code->status=1;
+
+                        $code->consumed_by=isset($request->Phone)?$request->Phone:"";
+
+                        $code->update();
                         //  code not used and success
                         return response([
                             'Code' => $validated['Code'],
