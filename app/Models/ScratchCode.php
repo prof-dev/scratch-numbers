@@ -54,6 +54,7 @@ class ScratchCode extends Model
             ScratchCode::create(
                 [
                     'code' => $code,
+                    'consumed_by'=>"",
                     'type' => $type,
                     'status' => false,
                     'export_batch_id' => $batch->id,
