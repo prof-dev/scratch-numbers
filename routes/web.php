@@ -37,9 +37,9 @@ Route::middleware('auth')->group(
 
         Route::post('/company/create', [App\Http\Controllers\CompanyController::class, 'store'])->name('create_company')->can('create',\App\Models\Company::class);
         Route::delete('/company/{company}', [App\Http\Controllers\CompanyController::class, 'destroy'])->name('delete_company')->can('create',\App\Models\Company::class);
-        Route::post('/scratch_codes_batches', [\App\Http\Controllers\ScratchCodesController::class, 'store'])->name('create_batch');
-        Route::delete('/scratch_codes_batches/{export_patch}', [\App\Http\Controllers\BatchDetailsController::class, 'destroy'])->name('delete_batch');
-        Route::post('/users/create',[\App\Http\Controllers\UserController::class, 'store'])->name('create_user');
+        Route::post('/scratch_codes_batches', [\App\Http\Controllers\ScratchCodesController::class, 'store'])->name('create_batch')->can('create',App\Models\ExportPatch::class);
+        Route::delete('/scratch_codes_batches/{export_patch}', [\App\Http\Controllers\BatchDetailsController::class, 'destroy'])->name('delete_batch')->can('delete', \App\Models\ExportPatch::class);
+        Route::post('/users/create',[\App\Http\Controllers\UserController::class, 'store'])->name('create_user')->can('create', \App\Models\User::class);
 
     }
 );
