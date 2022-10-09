@@ -54,7 +54,7 @@
                                 Status
                             </th>
                             <th scope="col" class="px-6 py-3 text-center">
-                                Batch Number
+                                Activated for
                             </th>
                         </tr>
                     </thead>
@@ -80,7 +80,7 @@
                                     </td>
 
                                     <td class="px-6 py-4">
-                                        {{ $exportPatch->batch_number }}
+                                        {{ $exportPatch->consumed_by }}
                                     </td>
 
                                 </tr>

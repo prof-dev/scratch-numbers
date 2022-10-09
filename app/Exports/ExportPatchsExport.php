@@ -35,9 +35,11 @@ class ExportPatchsExport implements WithHeadings, FromCollection, ShouldAutoSize
     {
         return [
             'Code',
-            'status',
+            'consume',
             'batch',
             'type',
+            'activated for'
+            
         ];
     }
 
@@ -50,6 +52,7 @@ class ExportPatchsExport implements WithHeadings, FromCollection, ShouldAutoSize
                 'status',
                 'export_batch_id',
                 'type',
+                'consumed_by'
             ]
         );
 
