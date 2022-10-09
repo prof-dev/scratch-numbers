@@ -71,10 +71,11 @@
                                     </td>
 
                                     <td class="px-6 py-4">
-                                        @if ($code->status === 0)
-                                            {{ __('Not Used') }}
+                                        @if ($code->status)
+                                        {{ __('Used') }}
+
                                             @else
-                                            {{ __('Used') }}
+                                            {{ __('Not Used') }}
                                         @endif
                                     </td>
 
