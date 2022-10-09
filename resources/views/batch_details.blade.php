@@ -80,7 +80,7 @@
                                     </td>
 
                                     <td class="px-6 py-4">
-                                        {{ $exportPatch->consumed_by }}
+                                        {{ $code->consumed_by }}
                                     </td>
 
                                 </tr>
