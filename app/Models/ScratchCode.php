@@ -15,7 +15,8 @@ class ScratchCode extends Model
         'type',
         'status',
         'export_batch_id',
-        'bar_code'
+        'bar_code',
+        'consumed_by'
     ];
 
     public function ExportPatch()
@@ -53,6 +54,7 @@ class ScratchCode extends Model
             ScratchCode::create(
                 [
                     'code' => $code,
+                    'consumed_by'=>"",
                     'type' => $type,
                     'status' => false,
                     'export_batch_id' => $batch->id,

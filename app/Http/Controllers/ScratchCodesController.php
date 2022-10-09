@@ -99,15 +99,20 @@ class ScratchCodesController extends Controller
      */
     public function destroy(Request $request)
     {
+
         //00 success
         //01 used
         //02 notExist
         //03 notExistForType
         //check validated request
+        $apiToken = $request->header('Authorization-Token');
+        if($apiToken!=="3fXeVRRTYAg4KUaE6fGoSAcXsYqDtvfYPSWWgAiW"){
+            return response()->json(["message"=>"UnAuthorized"],401);
+        }
         if($validated = $request->validate(
             [
                 'Code' => 'required',
-                'Type' => 'required'
+                'Type' => 'required',
             ]
         )){
             //check if the scratch code exists
@@ -115,9 +120,13 @@ class ScratchCodesController extends Controller
                 //check if it is from the same type
                 if(strcmp($code['type'], $validated['Type']) == 0){
                     //check if it is used
-                    if($code['deleted_at'] == null && $code['status'] == 0){
+                    if( $code['status'] == 0){
                         //softDeletes for the code
-                        $code->delete();
+                        $code->status=1;
+
+                        $code->consumed_by=isset($request->Phone)?$request->Phone:"";
+
+                        $code->update();
                         //  code not used and success
                         return response([
                             'Code' => $validated['Code'],

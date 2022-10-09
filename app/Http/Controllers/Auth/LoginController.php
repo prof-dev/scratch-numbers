@@ -59,6 +59,7 @@ class LoginController extends Controller
                 return response()->json(
                     [
                         'token' => $user->createToken('api-token')->plainTextToken,
+                        'username' => $user->name,
                     ], 201);
             } else{
                 // password is invalid
