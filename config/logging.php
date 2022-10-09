@@ -117,6 +117,14 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+
+        'deleted_codes' => [
+            'path' => storage_path('logs/deleted_codes.log'),
+        ],
+
+        'consumed_by' => [
+            'path' => storage_path('logs/consumed_by.log'),
+        ],
     ],
 
 ];
