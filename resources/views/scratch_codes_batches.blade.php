@@ -70,7 +70,22 @@
                 </form>
             </div>
         </div>
-            <div class="relative overflow-x-auto overflow-y-auto">
+            <div class="relative overflow-x-auto overflow-y-auto mt-5">
+                <div class="container bg-slate-900 p-10">
+                    <div class="inline-flex w-3/4 col-span-2 pl-10">
+                        <!-- search form -->
+                        <form action="" class="flex flex-row w-full h-full">
+                            <input class="w-full h-10 pl-8 text-xs text-gray-800 placeholder-gray-800 bg-white active:ring-gray-500 focus:ring-gray-500 rounded-l-xl" placeholder="Search here" type="text">
+                            <span class="w-16 h-10 flex justify-center items-center bg-white rounded-r-xl">
+                                <button class="h-full w-full flex justify-center items-center">
+                                    {{-- <img class="w-10 h-8" src="MaxPay/icons/Artboard – 24.svg" alt="Search"> --}}
+                                    <i class="fa-solid fa-magnifying-glass text-black"></i>
+                                </button>
+                            </span>
+                        </form>
+                        <!-- /search form  -->
+                    </div>
+                </div>
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-center text-white uppercase bg-gray-900 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
@@ -112,13 +127,13 @@
                                                 <a href="{{ url('batch_details/'.$batch->id) }}" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
                                                     Details
                                                 </a>
-                                                <button id="delete" onclick="downloadExcel({{$batch->id}})" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
+                                                <button id="delete" onclick="downloadExcel({{$batch->id}})" class="inline-flex items-center text-green-600 cursor-pointer hover:underline hover:text-blue-800">
                                                     Export
                                                 </button>
                                                 <form action="{{ route('delete_batch',$batch->id) }}" method="POST">
                                                     @csrf
                                                     @method("DELETE")
-                                                    <button type="submit" class="inline-flex items-center text-indigo-600 cursor-pointer hover:underline hover:text-blue-800">
+                                                    <button type="submit" class="inline-flex items-center text-red-600 cursor-pointer hover:underline hover:text-blue-800">
                                                         Delete
                                                     </button>
                                                     @error('batch_has_codes_'.$batch->id)
@@ -157,13 +172,13 @@
                                         {{-- {{ $company->code }} --}}
                                         <div class="flex">
                                             <div class="flex items-center justify-between w-full">
-                                                <a href="#" class="inline-flex items-center text-gray-600 cursor-not-allowed underline disabled">
+                                                <a href="#" class="inline-flex items-center text-gray-600 underline cursor-not-allowed disabled">
                                                     {{ __('No Details') }}
                                                 </a>
-                                                <a href="#" class="inline-flex items-center text-gray-600 cursor-not-allowed underline disabled">
+                                                <a href="#" class="inline-flex items-center text-gray-600 underline cursor-not-allowed disabled">
                                                     {{ __('Cant Export') }}
                                                 </a>
-                                                <a href="#" class="inline-flex items-center text-gray-600 cursor-not-allowed underline disabled">
+                                                <a href="#" class="inline-flex items-center text-gray-600 underline cursor-not-allowed disabled">
                                                     {{ __('Cant Delete Delete') }}
                                                 </a>
                                             </div>
@@ -188,7 +203,7 @@ fetch(url)
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.style.display = 'none';
-    a.href = url;   
+    a.href = url;
     // the filename you want
     a.download ="batch_download.xlsx";
     document.body.appendChild(a);
