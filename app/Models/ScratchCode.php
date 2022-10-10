@@ -89,4 +89,9 @@ class ScratchCode extends Model
         //find a non used code for this company
         return ScratchCode::where('code', $code)->exists();
     }
+
+    //This method returns the company ID for specified scratch code
+    public function company(){
+        return $this->ExportPatch->company_id;
+    }
 }
