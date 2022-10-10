@@ -100,4 +100,46 @@ class BatchDetailsController extends Controller
             return redirect()->back()->withErrors(['batch_has_codes_'.$exportPatch->id => "Can't delete this export patch"]);
         }
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\ExportPatch  $exportPatch
+     * @return \Illuminate\Http\Response
+     */
+    public function search(ExportPatch $exportPatch)
+    {
+        $validated = request()->validate([
+            'search' => 'required'
+        ]);
+        // dd($exportPatch->id);
+        // dd(ScratchCode::all()->first()->company());
+        // dd(current_user()->company->id);
+        $codes = ScratchCode::where('code', 'like', '%' . $validated['search'] . '%')
+            ->orWhere('bar_code', 'like', '%' . $validated['search'] . '%')->get();
+
+        $codes = $codes->filter(
+            function ($value , $key){
+                return $value->company() == current_user()->company->id;
+            }
+        );
+        // dd($codes);
+        if($codes->isEmpty()) {
+            return view(
+                'batch_details',
+                [
+                    'exportPatch' => $exportPatch,
+                    'company' => Company::findOrFail($exportPatch->company_id),
+                    'codes' => $codes,
+                ]
+            );
+        }else{
+            return redirect()->route('batch_details', $exportPatch->id)->withErrors(
+                [
+                    'search' => 'No batches found'
+                ]
+            );
+        }
+    }
+
 }
