@@ -70,27 +70,34 @@
                 </form>
             </div>
         </div>
-            <div class="relative overflow-x-auto overflow-y-auto mt-5">
-                <div class="container bg-slate-900 p-10">
+            <div class="relative mt-5 overflow-x-auto overflow-y-auto">
+                <div class="container p-10 bg-slate-900">
                     <div class="inline-flex w-3/4 col-span-2 pl-10">
                         <!-- search form -->
                         <form action="{{ route('search_batches') }}" method="POST" class="flex flex-row w-full h-full">
                             @method("POST")
                             @csrf
-                            <input name="search" class="w-full h-10 pl-8 text-xs text-gray-800 placeholder-gray-800 bg-white active:ring-gray-500 focus:ring-gray-500 rounded-l-xl" placeholder="Search here" type="text">
-                            <span class="w-16 h-10 flex justify-center items-center bg-white rounded-r-xl">
-                                <button class="h-full w-full flex justify-center items-center">
+                            <div class="w-full h-full">
+                                <input name="search" class="w-full h-10 pl-8 text-xs text-gray-800 placeholder-gray-800 bg-white active:ring-gray-500 focus:ring-gray-500 rounded-l-xl" placeholder="Search here" type="text">
+                                @error('search')
+                                    <span class="text-red-600" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <span class="flex items-center justify-center w-16 h-10 bg-white rounded-r-xl">
+                                <button class="flex items-center justify-center w-full h-full">
                                     {{-- <img class="w-10 h-8" src="MaxPay/icons/Artboard – 24.svg" alt="Search"> --}}
-                                    <i class="fa-solid fa-magnifying-glass text-black"></i>
+                                    <i class="text-black fa-solid fa-magnifying-glass"></i>
                                 </button>
                             </span>
                         </form>
                         <!-- /search form  -->
 
-                        <div class="inline-flex w-1/4 col-span-2 pl-10 text-blue-200">
-                            <div class="flex w-full h-full justify-center items-center">
+                        <div class="inline-flex w-1/4 col-span-2 pl-10 text-blue-300">
+                            <div class="flex items-center justify-center w-full h-full">
                                 <a href="{{ route('scratch_codes_batches') }}">
-                                    {{ __('View all batches') }}
+                                    {{ __('View All') }}
                                 </a>
                             </div>
                         </div>
