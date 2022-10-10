@@ -74,8 +74,10 @@
                 <div class="container bg-slate-900 p-10">
                     <div class="inline-flex w-3/4 col-span-2 pl-10">
                         <!-- search form -->
-                        <form action="" class="flex flex-row w-full h-full">
-                            <input class="w-full h-10 pl-8 text-xs text-gray-800 placeholder-gray-800 bg-white active:ring-gray-500 focus:ring-gray-500 rounded-l-xl" placeholder="Search here" type="text">
+                        <form action="{{ route('search_batches') }}" method="POST" class="flex flex-row w-full h-full">
+                            @method("POST")
+                            @csrf
+                            <input name="search" class="w-full h-10 pl-8 text-xs text-gray-800 placeholder-gray-800 bg-white active:ring-gray-500 focus:ring-gray-500 rounded-l-xl" placeholder="Search here" type="text">
                             <span class="w-16 h-10 flex justify-center items-center bg-white rounded-r-xl">
                                 <button class="h-full w-full flex justify-center items-center">
                                     {{-- <img class="w-10 h-8" src="MaxPay/icons/Artboard – 24.svg" alt="Search"> --}}
@@ -84,6 +86,14 @@
                             </span>
                         </form>
                         <!-- /search form  -->
+
+                        <div class="inline-flex w-1/4 col-span-2 pl-10 text-blue-200">
+                            <div class="flex w-full h-full justify-center items-center">
+                                <a href="{{ route('scratch_codes_batches') }}">
+                                    {{ __('View all batches') }}
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
