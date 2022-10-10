@@ -30,6 +30,8 @@ Route::middleware('auth')->group(
     function(){
 
         Route::post('/scratch_codes_batches/search', [\App\Http\Controllers\ScratchCodesController::class, 'search'])->name('search_batches');
+        Route::post('/batch_details/{export_patch}/search', [\App\Http\Controllers\BatchDetailsController::class, 'search'])->name('search_details');
+
 
         Route::get('/company', [App\Http\Controllers\CompanyController::class, 'index'])->name('company')->can('viewAny', \App\Models\Company::class);
         Route::get('/scratch_codes_batches', [\App\Http\Controllers\ScratchCodesController::class, 'index'])->name('scratch_codes_batches');
