@@ -9,7 +9,6 @@ use App\Models\ExportPatch;
 use App\Models\ScratchCode;
 use App\Rules\Uppercase;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class ScratchCodesController extends Controller
 {
@@ -74,10 +73,10 @@ class ScratchCodesController extends Controller
      * @param  \App\Models\ScratchCode  $scratchCode
      * @return \Illuminate\Http\Response
      */
-    public function show(ScratchCode $scratchCode)
-    {
-        //
-    }
+    // public function show(ScratchCode $scratchCode)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -86,10 +85,10 @@ class ScratchCodesController extends Controller
      * @param  \App\Models\ScratchCode  $scratchCode
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ScratchCode $scratchCode)
-    {
-        //
-    }
+    // public function update(Request $request, ScratchCode $scratchCode)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -169,4 +168,38 @@ class ScratchCodesController extends Controller
         }
         // ScratchCode::where()->get();
     }
+
+    /**
+     * Search resource from storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request){
+        // dd($request);
+        // dd(current_user()->id); 2
+        // dd(current_user()->company->id); 1
+        $validated = request()->validate(
+            [
+                'search' => 'required'
+            ]
+        );
+
+        $batches= ExportPatch::where('batch_number' , 'like' , '%'. $validated['search'] . '%')
+        ->where('company_id', current_user()->company->id)->get();
+        // dd($validated);
+
+        if($batches->isEmpty()){
+            return redirect()->back()->withErrors(
+                [
+                    'search' => 'No batches found'
+                ]
+            );
+        }
+        else{
+            return view('scratch_codes_batches', ['batches' => $batches, 'companies' => Company::all()]);
+        }
+
+    }
+
 }
