@@ -21,7 +21,7 @@ class ScratchCode extends Model
 
     public function ExportPatch()
     {
-        return $this->belongsTo('App\Models\ScratchCodeExport');
+        return $this->belongsTo(ExportPatch::class, 'export_batch_id');
     }
 
 
