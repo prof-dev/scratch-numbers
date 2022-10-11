@@ -9,7 +9,6 @@ use App\Models\ExportPatch;
 use App\Models\ScratchCode;
 use App\Rules\Uppercase;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
 
 class ScratchCodesController extends Controller
 {
@@ -20,17 +19,12 @@ class ScratchCodesController extends Controller
      */
     public function index()
     {
-
-        if(isIshraqAdmin()){
+        if (isIshraqAdmin()) {
             $batches = ExportPatch::with('company')->get();
-        $companies = Company::all();
-
-
-        }
-        else{
-            $batches = ExportPatch::with('company')->where("company_id",current_user()->company_id)->get();
-            $companies = Company::where("id",current_user()->company_id)->get();
-
+            $companies = Company::all();
+        } else {
+            $batches = ExportPatch::with('company')->where('company_id', current_user()->company_id)->get();
+            $companies = Company::where('id', current_user()->company_id)->get();
         }
 
         return view('scratch_codes_batches', ['batches' => $batches, 'companies' => $companies]);
@@ -57,16 +51,14 @@ class ScratchCodesController extends Controller
         return redirect()->route('scratch_codes_batches');
     }
 
-
     public function generateJsonBatch(GenerateRequest $request)
     {
-
-       $scratchCodes= ScratchCode::generateCodes(current_user()->company_id, $request->number, $request->type);
+        $scratchCodes = ScratchCode::generateCodes(current_user()->company_id, $request->number, $request->type);
         // dd($validated);
         current_user()->destroyToken();
-        return response()->json(["data"=>GenerateResponse::collection($scratchCodes)],200);
-    }
 
+        return response()->json(['data' => GenerateResponse::collection($scratchCodes)], 200);
+    }
 
     /**
      * Display the specified resource.
@@ -99,32 +91,31 @@ class ScratchCodesController extends Controller
      */
     public function destroy(Request $request)
     {
-
         //00 success
         //01 used
         //02 notExist
         //03 notExistForType
         //check validated request
         $apiToken = $request->header('Authorization-Token');
-        if($apiToken!=="3fXeVRRTYAg4KUaE6fGoSAcXsYqDtvfYPSWWgAiW"){
-            return response()->json(["message"=>"UnAuthorized"],401);
+        if ($apiToken !== '3fXeVRRTYAg4KUaE6fGoSAcXsYqDtvfYPSWWgAiW') {
+            return response()->json(['message' => 'UnAuthorized'], 401);
         }
-        if($validated = $request->validate(
+        if ($validated = $request->validate(
             [
                 'Code' => 'required',
                 'Type' => 'required',
             ]
-        )){
+        )) {
             //check if the scratch code exists
-            if($code = ScratchCode::withTrashed()->where('code', $validated['Code'])->first()){
+            if ($code = ScratchCode::withTrashed()->where('code', $validated['Code'])->first()) {
                 //check if it is from the same type
-                if(strcmp($code['type'], $validated['Type']) == 0){
+                if (strcmp($code['type'], $validated['Type']) == 0) {
                     //check if it is used
-                    if( $code['status'] == 0){
+                    if ($code['status'] == 0) {
                         //softDeletes for the code
-                        $code->status=1;
+                        $code->status = 1;
 
-                        $code->consumed_by=isset($request->Phone)?$request->Phone:"";
+                        $code->consumed_by = isset($request->Phone) ? $request->Phone : '';
 
                         $code->update();
                         //  code not used and success
@@ -132,39 +123,38 @@ class ScratchCodesController extends Controller
                             'Code' => $validated['Code'],
                             'Type' => $validated['Type'],
                             'StatusCode' => '00',
-                            'StatusMessage'=>'Success'
+                            'StatusMessage' => 'Success',
                         ]);
-                    }else{
+                    } else {
                         //code is used
                         return response(
                             [
                                 'Code' => $validated['Code'],
                                 'Type' => $validated['Type'],
                                 'StatusCode' => '01',
-                                'StatusMessage'=>'Code Already Used'
+                                'StatusMessage' => 'Code Already Used',
                             ]
                         );
                     }
-                }else{
+                } else {
                     return response(
                         [
-                        'Code' => $validated['Code'],
-                        'Type' => $validated['Type'],
-                        'StatusCode' => '03',
-                        'StatusMessage'=>'not exist with selected type'
+                            'Code' => $validated['Code'],
+                            'Type' => $validated['Type'],
+                            'StatusCode' => '03',
+                            'StatusMessage' => 'not exist with selected type',
                         ]
                     );
                 }
-            }
-            else {
+            } else {
                 return response([
                     'Code' => $validated['Code'],
                     'Type' => $validated['Type'],
                     'StatusCode' => '02',
-                    'StatusMessage'=>'Code Does Not Exist'
+                    'StatusMessage' => 'Code Does Not Exist',
                 ]);
             }
-        }else{
+        } else {
             return response(['message' => 'Invalid']);
         }
         // ScratchCode::where()->get();

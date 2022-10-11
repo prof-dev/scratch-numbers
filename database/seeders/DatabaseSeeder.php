@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Company::factory()->create([
             'id' => 1,
             'name' => 'IshraqGroup',
-            'code'=>"001"
+            'code' => '001',
         ]);
 
         \App\Models\Role::factory()->create([
@@ -42,37 +42,37 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
             'password' => bcrypt('1234567890'),
-            'company_id'=>1,
+            'company_id' => 1,
             'role_id' => 1,
         ]);
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@readandwrite.com',
             'password' => bcrypt('1234567890'),
-            'company_id'=>1,
+            'company_id' => 1,
             'role_id' => 2,
         ]);
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@read.com',
             'password' => bcrypt('1234567890'),
-            'company_id'=>1,
+            'company_id' => 1,
             'role_id' => 3,
         ]);
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@api.com',
             'password' => bcrypt('1234567890'),
-            'company_id'=>1,
+            'company_id' => 1,
             'role_id' => 4,
         ]);
-       
+
         \App\Models\User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@company.com',
             'password' => bcrypt('1234567890'),
             'role_id' => 2,
-            'company_id'=>1,
+            'company_id' => 1,
         ]);
     }
 }

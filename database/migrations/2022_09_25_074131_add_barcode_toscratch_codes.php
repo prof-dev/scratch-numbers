@@ -15,10 +15,8 @@ return new class extends Migration
     {
         //
         Schema::table('scratch_codes', function (Blueprint $table) {
-
-        $table->string('bar_code',16)->unique();
+            $table->string('bar_code', 16)->unique();
         });
-
     }
 
     /**
@@ -29,8 +27,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('scratch_codes', function (Blueprint $table) {
-
             $table->drop('bar_code');
-            });
+        });
     }
 };

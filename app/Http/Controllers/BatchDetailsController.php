@@ -91,11 +91,11 @@ class BatchDetailsController extends Controller
     {
         // dd($exportPatch->hasUsed());
         //if this batch doesn't has used codes you can delete
-        if(!$exportPatch->hasUsed()){
+        if (! $exportPatch->hasUsed()) {
             $exportPatch->delete();
+
             return redirect()->back();
-        }
-        else{
+        } else {
             // else if it has used codes you cant delete it
             return redirect()->back()->withErrors(['batch_has_codes_'.$exportPatch->id => "Can't delete this export patch"]);
         }

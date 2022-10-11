@@ -12,7 +12,6 @@ use Maatwebsite\Excel\Events\AfterSheet;
 
 class ExportPatchsExport implements WithHeadings, FromCollection, ShouldAutoSize, WithEvents
 {
-
     // need to be revised
     protected $batch_id;
 
@@ -55,7 +54,6 @@ class ExportPatchsExport implements WithHeadings, FromCollection, ShouldAutoSize
 
         return $codes;
     }
-
 
     public function registerEvents(): array
     {

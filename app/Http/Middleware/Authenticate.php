@@ -15,11 +15,10 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         // dd(str_contains(url()->current(), '/api'));
-        if (! $request->expectsJson()&&!(str_contains(url()->current(), '/api'))) {
+        if (! $request->expectsJson() && ! (str_contains(url()->current(), '/api'))) {
             return route('login');
-        }
-        else{
-// return response()->json(["message"=>"Un authenticated"],401);
+        } else {
+            // return response()->json(["message"=>"Un authenticated"],401);
         }
     }
 }

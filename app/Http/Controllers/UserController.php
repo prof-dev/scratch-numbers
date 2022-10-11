@@ -16,13 +16,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $companies=isIshraqAdmin()? Company::all():Company::where("id",current_user()->company_id)->get();
+        $companies = isIshraqAdmin() ? Company::all() : Company::where('id', current_user()->company_id)->get();
         // dd($companies);
         return view('users',
-        [
-            'companies' =>$companies,
-            'roles' => Role::all()
-        ]);
+            [
+                'companies' => $companies,
+                'roles' => Role::all(),
+            ]);
     }
 
     /**
@@ -39,10 +39,10 @@ class UserController extends Controller
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|min:6',
                 'role' => 'required|integer',
-                'company' => 'integer'
+                'company' => 'integer',
             ]
         );
-        if(
+        if (
             User::create(
                 [
                     'name' => $validated['name'],
@@ -51,10 +51,9 @@ class UserController extends Controller
                     'role_id' => $validated['role'],
                 ]
             )
-        ){
+        ) {
             return redirect()->route('users');
-        }
-        else{
+        } else {
             abort('500');
         }
     }

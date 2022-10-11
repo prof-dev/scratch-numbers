@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('scratch_codes', function (Blueprint $table) {
             //
-            $table->string("consumed_by",15)->default(null);
+            $table->string('consumed_by', 15)->default(null);
         });
     }
 

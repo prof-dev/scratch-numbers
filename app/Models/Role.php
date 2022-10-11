@@ -26,7 +26,8 @@ class Role extends Model
 
     public const IS_API_CONSUMER = 4;
 
-    public function users(){
+    public function users()
+    {
         return $this->hasMany(User::class);
     }
 }

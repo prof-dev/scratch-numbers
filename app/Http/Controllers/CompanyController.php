@@ -15,11 +15,10 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        if(!isIshraqAdmin()){
-        return view('home');
-            
+        if (! isIshraqAdmin()) {
+            return view('home');
         }
-        $companies =isIshraqAdmin()? Company::all():Company::where("id",current_user()->company_id)->get();
+        $companies = isIshraqAdmin() ? Company::all() : Company::where('id', current_user()->company_id)->get();
 
         return view('company', ['companies' => $companies]);
     }
@@ -81,15 +80,14 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         //check if the resource exists
-        if(ExportPatch::where('company_id', $id)->get()->isEmpty()){
+        if (ExportPatch::where('company_id', $id)->get()->isEmpty()) {
             //delete the resource from the database
             Company::where('id', $id)->delete();
             //redirect back to company view
             return redirect()->back();
-        }
-        else{
+        } else {
             // return with error messages
-            return redirect()->route('company')->withErrors(['company_has_batches'.$id=>'Can\'t delete this company it has batches']);
+            return redirect()->route('company')->withErrors(['company_has_batches'.$id => 'Can\'t delete this company it has batches']);
         }
         // return
     }

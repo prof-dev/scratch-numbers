@@ -28,11 +28,10 @@ class GenerateRequest extends FormRequest
     {
         return [
             'number' => 'required|integer|min:1|max:20',
-          
-            'type' => ['string', Rule::in("INT","SDN")],
+
+            'type' => ['string', Rule::in('INT', 'SDN')],
         ];
     }
-
 
     protected function passedValidation()
     {

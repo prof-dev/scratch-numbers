@@ -20,8 +20,7 @@ class CompanyPolicy
     public function viewAny(User $user)
     {
         // return auth()->user()->role_id == Role::IS_ADMIN;
-        return current_user()->role_id == Role::IS_ADMIN||Role::IS_READ_AND_WRITE;
-
+        return current_user()->role_id == Role::IS_ADMIN || Role::IS_READ_AND_WRITE;
     }
 
     /**
@@ -44,7 +43,7 @@ class CompanyPolicy
      */
     public function create(User $user)
     {
-        return current_user()->role_id == Role::IS_ADMIN||Role::IS_READ_AND_WRITE;
+        return current_user()->role_id == Role::IS_ADMIN || Role::IS_READ_AND_WRITE;
     }
 
     /**

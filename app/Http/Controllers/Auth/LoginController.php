@@ -41,49 +41,45 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-
     /**
      * Login an api user
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function apiLogin(Request $request){
-      
-
+    public function apiLogin(Request $request)
+    {
         // find user with email
-        if($user = $this->findUserByEmail($request->email)){
-
+        if ($user = $this->findUserByEmail($request->email)) {
             // check if password is correct
-            if(Hash::check($request->password, $user->password)){
+            if (Hash::check($request->password, $user->password)) {
                 return response()->json(
                     [
                         'token' => $user->createToken('api-token')->plainTextToken,
                         'username' => $user->name,
                     ], 201);
-            } else{
+            } else {
                 // password is invalid
                 return response()->json([
-                    'email' => 'email or password dosn\'t exist or not correct'
+                    'email' => 'email or password dosn\'t exist or not correct',
                 ], 401);
             }
-        }
-        else{
+        } else {
             // email is invalid
             return response()->json([
-                'email' => 'email or password dosn\'t exist or not correct'
+                'email' => 'email or password dosn\'t exist or not correct',
             ], 401);
         }
-
     }
 
     /**
      * find the user by email
      *
-     * @param  String $email
+     * @param  string  $email
      * @return \App\Models\User
      */
-    public function findUserByEmail($email){
+    public function findUserByEmail($email)
+    {
         return User::where('email', $email)->first();
     }
 }

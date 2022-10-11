@@ -15,15 +15,18 @@ class Company extends Model
 
     protected $primaryKey = 'id';
 
-    public function exportBatches(){
+    public function exportBatches()
+    {
         return $this->hasMany(ExportPatch::class);
     }
 
-    public function users(){
+    public function users()
+    {
         return $this->hasMany(User::class);
     }
 
-    public function scratchCodes(){
-        return $this->hasManyThrough(ScratchCode::class,ExportPatch::class, 'company_id', 'export_batch_id');
+    public function scratchCodes()
+    {
+        return $this->hasManyThrough(ScratchCode::class, ExportPatch::class, 'company_id', 'export_batch_id');
     }
 }

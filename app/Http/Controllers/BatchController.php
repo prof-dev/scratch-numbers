@@ -23,7 +23,7 @@ class BatchController extends Controller
         );
         if ($codes->isNotEmpty()) {
             // $export = ;
-            return Excel::download(new ExportPatchsExport($exportPatch->id), 'Batch_'.$exportPatch->company->code.'_'. $exportPatch->id.'.xlsx');
+            return Excel::download(new ExportPatchsExport($exportPatch->id), 'Batch_'.$exportPatch->company->code.'_'.$exportPatch->id.'.xlsx');
         }
 
         return redirect()->route('scratch_codes_batches');

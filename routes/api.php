@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,13 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'apiLogin']);
 
-
 Route::middleware('auth:sanctum')->group(
-    function(){
-    Route::post('/generate',[\App\Http\Controllers\ScratchCodesController::class,'generateJsonBatch'])->name('generate');
-
+    function () {
+        Route::post('/generate', [\App\Http\Controllers\ScratchCodesController::class, 'generateJsonBatch'])->name('generate');
     });
-    Route::post('/consume',[\App\Http\Controllers\ScratchCodesController::class,'destroy'])->name('consume');
+Route::post('/consume', [\App\Http\Controllers\ScratchCodesController::class, 'destroy'])->name('consume');

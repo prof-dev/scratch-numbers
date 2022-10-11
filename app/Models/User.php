@@ -22,7 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
-        'company_id'
+        'company_id',
     ];
 
     /**
@@ -44,29 +44,35 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class);
     }
 
-    public function company(){
+    public function company()
+    {
         return $this->belongsTo(Company::class);
     }
 
-    public function getUserScratchCodes(){
+    public function getUserScratchCodes()
+    {
         return $this->company->scratchCodes;
     }
 
-    public function getUserExportBatches(){
+    public function getUserExportBatches()
+    {
         return $this->company->exportBatches;
     }
 
     //method to destroy All Tokens
-    public function destroyAllTokens(){
+    public function destroyAllTokens()
+    {
         return $this->tokens()->delete();
     }
 
     //method to destroy One Token
-    public function destroyToken(){
+    public function destroyToken()
+    {
         return $this->currentAccessToken()->delete();
     }
 }

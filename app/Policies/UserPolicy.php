@@ -2,13 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\User;
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class UserPolicy
 {
-
     //TODO revise users page
     use HandlesAuthorization;
 

@@ -21,9 +21,12 @@ class ExportPatch extends Model
     {
         return $this->belongsTo(Company::class);
     }
-    public function user(){
+
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
+
     public function ScratchCodes()
     {
         return $this->hasMany(ScratchCode::class, 'id', 'export_batch_id');
@@ -34,7 +37,8 @@ class ExportPatch extends Model
         return ScratchCode::where('export_batch_id', $this->id)->get()->count();
     }
 
-    public function hasUsed(){
+    public function hasUsed()
+    {
         //check if there are any used scratch codes for this export batch
         return ScratchCode::where('export_batch_id', $this->id)->where('status', 1)->get()->isNotEmpty();
     }
