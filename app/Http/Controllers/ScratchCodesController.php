@@ -7,6 +7,7 @@ use App\Http\Resources\GenerateResponse;
 use App\Models\Company;
 use App\Models\ExportPatch;
 use App\Models\ScratchCode;
+use App\Models\User;
 use App\Rules\Uppercase;
 use Illuminate\Http\Request;
 
@@ -186,6 +187,7 @@ class ScratchCodesController extends Controller
         );
 
         $batches= ExportPatch::where('batch_number' , 'like' , '%'. $validated['search'] . '%')
+        ->orWhere('created_at' , 'like' , '%'. $validated['search'] . '%')
         ->get();
 
         $companies = Company::where('name', 'like', "%" .$validated['search']. "%")->get();
@@ -196,6 +198,14 @@ class ScratchCodesController extends Controller
                 $batches->push($batch);
             }
         }
+
+        $users = User::where('name', 'like', "%". $validated['search'] ."%" )->get();
+        foreach ($users as $user){
+            foreach ($user->getUserExportBatches() as $batch){
+                $batches->push($batch);
+            }
+        }
+
         $batches = $batches->unique()->sortBy('created_at');
         // dd($batches);
         // dd($validated);
