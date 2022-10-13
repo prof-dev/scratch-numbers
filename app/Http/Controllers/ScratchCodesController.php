@@ -10,6 +10,7 @@ use App\Models\ScratchCode;
 use App\Models\User;
 use App\Rules\Uppercase;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ScratchCodesController extends Controller
 {
@@ -125,6 +126,15 @@ class ScratchCodesController extends Controller
                         $code->status=1;
 
                         $code->consumed_by=isset($request->Phone)?$request->Phone:"";
+
+                        Log::channel('consumed_by')
+                        ->info("Consumed code: " . isset($request->Phone)?$request->Phone:"no number available",
+                        [
+                            'Code' => $code->code,
+                            'IP' => request()->ip(),
+                            'Time' => now(),
+                        ]
+                        );
 
                         $code->update();
                         //  code not used and success

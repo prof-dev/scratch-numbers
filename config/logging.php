@@ -123,7 +123,9 @@ return [
         ],
 
         'consumed_by' => [
+            'driver' => 'single',
             'path' => storage_path('logs/consumed_by.log'),
+            'level' => env('LOG_LEVEL', 'debug'),
         ],
     ],
 
