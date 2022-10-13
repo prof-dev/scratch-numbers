@@ -186,8 +186,20 @@ class ScratchCodesController extends Controller
         );
 
         $batches= ExportPatch::where('batch_number' , 'like' , '%'. $validated['search'] . '%')
-        ->where('company_id', current_user()->company->id)->get();
+        ->get();
+
+        $companies = Company::where('name', 'like', "%" .$validated['search']. "%")->get();
+        foreach ($companies as $company) {
+            // dd($company->exportBatches);
+            // $batches->concat($company->exportBatches);
+            foreach ($company->exportBatches as $batch) {
+                $batches->push($batch);
+            }
+        }
+        $batches = $batches->unique()->sortBy('created_at');
+        // dd($batches);
         // dd($validated);
+        // dd($batches);
 
         if($batches->isEmpty()){
             return redirect()->back()->withErrors(

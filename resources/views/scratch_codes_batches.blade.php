@@ -80,7 +80,7 @@
                             <div class="w-full h-full">
                                 <input name="search" class="w-full h-10 pl-8 text-xs text-gray-800 placeholder-gray-800 bg-white active:ring-gray-500 focus:ring-gray-500 rounded-l-xl" placeholder="Search here" type="text">
                                 @error('search')
-                                    <span class="text-red-600" role="alert">
+                                    <span class="text-red-600 mt-3" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -115,6 +115,9 @@
                             <th scope="col" class="px-6 py-3 text-center">
                                 # of Codes
                             </th>
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Created At
+                            </th>
                             <th scope="col" class="px-6 py-3 text-center border-l-2">
                                 Actions
                             </th>
@@ -135,6 +138,10 @@
 
                                     <td class="px-6 py-4">
                                         {{ $batch->numberOfScratchCodes() }}
+                                    </td>
+
+                                    <td class="px-6 py-4">
+                                        {{ $batch->created_at }}
                                     </td>
 
                                     <td class="px-6 py-4 border-l-2">
