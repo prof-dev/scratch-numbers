@@ -57,10 +57,21 @@
                             </div>
                             <span class="flex items-center justify-center w-16 h-10 bg-white rounded-r-xl">
                                 <button class="flex items-center justify-center w-full h-full">
-                                    {{-- <img class="w-10 h-8" src="MaxPay/icons/Artboard – 24.svg" alt="Search"> --}}
                                     <i class="text-black fa-solid fa-magnifying-glass"></i>
                                 </button>
                             </span>
+
+                            <div class="ml-3"><select id="search_by" name="search_by" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option value="default" selected>Choose a search by</option>
+                                    <option value="company" >Search by Company Name</option>
+                                    <option value="date" >Search by Date</option>
+                                </select>
+                                @error('search_by')
+                                    <span class="text-red-600" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </form>
                         <!-- /search form  -->
 

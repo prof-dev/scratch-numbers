@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Company;
 use App\Models\ExportPatch;
 use App\Models\ScratchCode;
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 
 class BatchDetailsController extends Controller
@@ -110,19 +111,35 @@ class BatchDetailsController extends Controller
     public function search(ExportPatch $exportPatch)
     {
         $validated = request()->validate([
-            'search' => 'required'
+            'search' => 'required',
+            'search_by' => 'required',
         ]);
         // dd($exportPatch->id);
         // dd(ScratchCode::all()->first()->company());
         // dd(current_user()->company->id);
-        $codes = ScratchCode::where('code', 'like', '%' . $validated['search'] . '%')
-            ->orWhere('bar_code', 'like', '%' . $validated['search'] . '%')->get();
+        // $codes = ScratchCode::where('code', 'like', '%' . $validated['search'] . '%')
+        //     ->orWhere('bar_code', 'like', '%' . $validated['search'] . '%')->get();
 
-        $codes = $codes->filter(
-            function ($value , $key){
-                return $value->company() == current_user()->company->id;
-            }
-        );
+        // $codes = $codes->filter(
+        //     function ($value , $key){
+        //         return $value->company() == current_user()->company->id;
+        //     }
+        // );
+
+        $codes = collect();
+
+        switch ($validated['search_by']){
+            case 'company':
+                $codes = BatchDetailsController::searchByCompany($validated['search']);
+                break;
+
+            case 'date': $codes = BatchDetailsController::searchByDate($validated['search']);
+            break;
+
+            default: $codes = BatchDetailsController::searchByDate($validated['search']);
+            $codes->add(BatchDetailsController::searchByCompany($validated['search'])); break;
+        }
+
         // dd($codes);
         if($codes->isEmpty()) {
             return view(
@@ -140,6 +157,34 @@ class BatchDetailsController extends Controller
                 ]
             );
         }
+    }
+
+    /**
+     * search resource by company name.
+     *
+     * @param  String  $company_name
+     * @return \Illuminate\Support\Collection
+     */
+    private function searchByCompany(String $company_name) : Collection
+    {
+        $codes = collect();
+        $companies = Company::where('name', 'like' , '%' . $company_name . '%')->get();
+            foreach ($companies as $company) {
+                foreach($company->scratchCodes as $code) $codes->push($code);
+            }
+        return $codes = $codes->unique()->groupBy('created_at');
+    }
+
+
+    /**
+     * search resource by creation date.
+     *
+     * @param  String  $company_name
+     * @return \Illuminate\Support\Collection
+     */
+    private function searchByDate( String $date) : Collection
+    {
+        return ScratchCode::where('created_at', 'like' , '%' . $date . '%')->get()->unique()->sortBy('created_at');
     }
 
 }
