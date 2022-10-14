@@ -96,6 +96,11 @@
                             <th scope="col" class="px-6 py-3 text-center">
                                 Status
                             </th>
+
+                            <th scope="col" class="px-6 py-3 text-center">
+                                Created At
+                            </th>
+
                             <th scope="col" class="px-6 py-3 text-center">
                                 Batch Number
                             </th>
@@ -120,6 +125,11 @@
                                             @else
                                             {{ __('Not Used') }}
                                         @endif
+                                    </td>
+
+
+                                    <td class="px-6 py-4">
+                                        {{ $code->created_at }}
                                     </td>
 
                                     <td class="px-6 py-4">
