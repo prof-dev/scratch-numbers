@@ -172,7 +172,7 @@ class BatchDetailsController extends Controller
             foreach ($companies as $company) {
                 foreach($company->scratchCodes as $code) $codes->push($code);
             }
-        return $codes = $codes->unique()->groupBy('created_at');
+        return $codes = $codes->unique()->sortBy('created_at');
     }
 
 
