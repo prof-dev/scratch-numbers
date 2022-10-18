@@ -40,7 +40,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
-    public function logout(Request $request)
+    public function apiLogout(Request $request)
     {
         # code...
         current_user()->destroyToken();
