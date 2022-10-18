@@ -24,10 +24,8 @@ class DashboardController extends Controller
     public function groupByDateWhereComanyIs(Request $request)
     {
         # code...
-        $result=ScratchCode::where("type","SDN")->select(["count(id) as total","sum(status) as activated"])->groupBy("created_at")->with("company")->get();
+        $result=ScratchCode::where("companyId",$request->companyId)->where("type","SDN")->select(["count(id) as total","sum(status) as activated"])->groupBy("created_at")->with("company")->get();
         dd($result);
-        if(isset($request->dateFrom)&&isset($request->dateTo)){
-
-        }
+       
     }
 }
