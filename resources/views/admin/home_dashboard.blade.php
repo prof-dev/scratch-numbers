@@ -2,24 +2,28 @@
 
 @section('content')
 
-<main class="ml-60 pt-16 max-h-screen overflow-auto">
+<main class="max-h-screen pt-16 overflow-auto ml-60">
     <div class="px-6 py-8">
         <div class="max-w-4xl mx-auto">
-            <div class="bg-white rounded-3xl p-8 mb-5">
-                <h1 class="text-xl font-bold mb-10">Select Company to find a report on</h1>
+            <div class="p-8 mb-5 bg-white rounded-3xl">
+                <h1 class="mb-10 text-xl font-bold">Select Company to find a report on</h1>
                 <div class="flex items-center justify-between w-full">
-                    <form action="">
+                    <form action="{{ route('dashboardCompany') }}" method="POST">
+                        @csrf
+                        @method("POST")
                         <div class="flex items-center justify-around w-full">
-                            <div class="datepicker relative form-floating mb-3 px-3 xl:w-1/2" data-mdb-toggle-button="false">
+                            <div class="relative px-3 mb-3 datepicker form-floating xl:w-1/2" data-mdb-toggle-button="false">
                               <input type="date"
                                 class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                placeholder="Select a date" data-mdb-toggle="datepicker" />
+                                placeholder="Select a date" data-mdb-toggle="datepicker"
+                                name="start_date" required />
                               <label for="floatingInput" class="text-gray-700">Select start date</label>
                             </div>
-                            <div class="datepicker relative form-floating mb-3 px-2 xl:w-1/2" data-mdb-toggle-button="false">
+                            <div class="relative px-2 mb-3 datepicker form-floating xl:w-1/2" data-mdb-toggle-button="false">
                                 <input type="date"
                                   class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                  placeholder="Select a date" data-mdb-toggle="datepicker" />
+                                  placeholder="Select a date" data-mdb-toggle="datepicker"
+                                  name="end_date" required />
                                 <label for="floatingInput" class="text-gray-700">Select end date</label>
                               </div>
                         </div>
