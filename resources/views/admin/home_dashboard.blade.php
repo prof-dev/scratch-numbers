@@ -27,18 +27,23 @@
 
                         </div> --}}
                         <div class="flex items-center justify-center">
-                            <div class="datepicker relative form-floating mb-3 xl:w-96" data-mdb-toggle-button="false">
-                              <select type="date"
+                            <div class="relative mb-3 datepicker form-floating xl:w-96" data-mdb-toggle-button="false">
+                              <select
                                 class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                placeholder="Select a date" >
-                                <option value="">h1</option>
+                                placeholder="Select a date"
+                                name="company"
+                                required>
+                                <option value="">select a company</option>
+                                    @foreach ( $companies as $company )
+                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                    @endforeach
                                 </select>
                               <label for="floatingInput" class="text-gray-700">Select a company</label>
                             </div>
                         </div>
                         <div class="flex items-center gap-x-2">
-                            <button type="button"
-                                class="inline-flex items-center justify-center h-9 px-5 rounded-xl bg-gray-900 text-gray-300 hover:text-white text-sm font-semibold transition">
+                            <button type="submit" name="submit"
+                                class="inline-flex items-center justify-center px-5 text-sm font-semibold text-gray-300 transition bg-gray-900 h-9 rounded-xl hover:text-white">
                                 Submit
                             </button>
                         </div>
