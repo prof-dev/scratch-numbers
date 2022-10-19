@@ -60,70 +60,70 @@
                     <table class="min-w-full text-center">
                         <thead class="border-b">
                           <tr>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900">
                               Company Name
                             </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900">
                               # Local Codes
                             </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900">
                               # Local Used
                             </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900">
                               # International Codes
                             </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4">
+                            <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900">
                               # International Used
                             </th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr class="border-b bg-gray-700 boder-gray-900">
-                            <td class="text-sm text-white font-medium px-6 py-4 whitespace-nowrap">
+                          <tr class="bg-gray-700 border-b boder-gray-900">
+                            <td class="px-6 py-4 text-sm font-medium text-white whitespace-nowrap">
                               Dark
                             </td>
-                            <td class="text-sm text-white font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
                               Cell
                             </td>
-                            <td class="text-sm text-white font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
                               Cell
                             </td>
-                            <td class="text-sm text-white font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
                               Cell
                             </td>
-                            <td class="text-sm text-white font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
                               Cell
                             </td>
                           </tr>
                         </tbody>
                       </table>
                     {{-- <div>
-                        <h2 class="text-2xl font-bold mb-4">Stats</h2>
+                        <h2 class="mb-4 text-2xl font-bold">Stats</h2>
 
                         <div class="grid grid-cols-2 gap-4">
                             <div class="col-span-2">
                                 <div class="p-4 bg-green-100 rounded-xl">
-                                    <div class="font-bold text-xl text-gray-800 leading-none">Good day, <br>Kristin
+                                    <div class="text-xl font-bold leading-none text-gray-800">Good day, <br>Kristin
                                     </div>
                                     <div class="mt-5">
                                         <button type="button"
-                                            class="inline-flex items-center justify-center py-2 px-3 rounded-xl bg-white text-gray-800 hover:text-green-500 text-sm font-semibold transition">
+                                            class="inline-flex items-center justify-center px-3 py-2 text-sm font-semibold text-gray-800 transition bg-white rounded-xl hover:text-green-500">
                                             Start tracking
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="p-4 bg-yellow-100 rounded-xl text-gray-800">
-                                <div class="font-bold text-2xl leading-none">20</div>
+                            <div class="p-4 text-gray-800 bg-yellow-100 rounded-xl">
+                                <div class="text-2xl font-bold leading-none">20</div>
                                 <div class="mt-2">Tasks finished</div>
                             </div>
-                            <div class="p-4 bg-yellow-100 rounded-xl text-gray-800">
-                                <div class="font-bold text-2xl leading-none">5,5</div>
+                            <div class="p-4 text-gray-800 bg-yellow-100 rounded-xl">
+                                <div class="text-2xl font-bold leading-none">5,5</div>
                                 <div class="mt-2">Tracked hours</div>
                             </div>
                             <div class="col-span-2">
-                                <div class="p-4 bg-purple-100 rounded-xl text-gray-800">
-                                    <div class="font-bold text-xl leading-none">Your daily plan</div>
+                                <div class="p-4 text-gray-800 bg-purple-100 rounded-xl">
+                                    <div class="text-xl font-bold leading-none">Your daily plan</div>
                                     <div class="mt-2">5 of 8 completed</div>
                                 </div>
                             </div>
@@ -140,90 +140,90 @@
 @endsection
 
 {{-- <tr class="border-b">
-                            <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                               Default
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
                           </tr>
-                          <tr class="border-b bg-blue-100 border-blue-200">
-                            <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                          <tr class="bg-blue-100 border-b border-blue-200">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                               Primary
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
                           </tr>
-                          <tr class="border-b bg-purple-100 border-purple-200">
-                            <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                          <tr class="bg-purple-100 border-b border-purple-200">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                               Secondary
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
                           </tr>
-                          <tr class="border-b bg-green-100 border-green-200">
-                            <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                          <tr class="bg-green-100 border-b border-green-200">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                               Success
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
                           </tr>
-                          <tr class="border-b bg-red-100 border-red-200">
-                            <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                          <tr class="bg-red-100 border-b border-red-200">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                               Danger
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
                           </tr>
-                          <tr class="border-b bg-yellow-100 border-yellow-200">
-                            <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                          <tr class="bg-yellow-100 border-b border-yellow-200">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                               Warning
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
                           </tr>
-                          <tr class="border-b bg-indigo-100 border-indigo-200">
-                            <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                          <tr class="bg-indigo-100 border-b border-indigo-200">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                               Info
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
                           </tr>
-                          <tr class="border-b bg-gray-50 border-gray-200">
-                            <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                          <tr class="border-b border-gray-200 bg-gray-50">
+                            <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
                               Light
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
-                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 text-sm font-light text-gray-900 whitespace-nowrap">
                               Cell
                             </td>
                           </tr> --}}
