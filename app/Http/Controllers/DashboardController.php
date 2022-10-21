@@ -18,9 +18,10 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Contracts\View\View
      */
-    public function index(): View{
+    public function index(Request $request): View{
         return view('admin.home_dashboard', [
-            'companies' => Company::all()
+            'companies' => Company::all(),
+            'groups' => $this->groupByCompanyBetweenTwoDates(request())
         ]);
     }
 
@@ -45,7 +46,7 @@ class DashboardController extends Controller
 
     }
 
-    private function groupByCompanyBetweenTwoDates(array $request) : View
+    private function groupByCompanyBetweenTwoDates($request) : array
     {
         # code...
         // dd($request);
@@ -53,7 +54,7 @@ class DashboardController extends Controller
              ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
              ->select('export_batches.company_id as company_id', DB::raw('count(scratch_codes.id) as total'),DB::raw('sum(scratch_codes.status) as used_count'))
              ->where('scratch_codes.type',"SDN")
-             
+
              ->groupBy('company_id')
              ->get();
              $InternationalCodes= DB::table('scratch_codes')
@@ -70,17 +71,15 @@ class DashboardController extends Controller
 
 
         if(isset($request['start_date'])&&isset($request['end_date'])){
-           
+
 
         }
 
-        dd($result);
+        // dd($result);
 
 
 
-        return view('admin.home_dashboard', 
-            
-        $result);
+        return $result;
     }
 
 

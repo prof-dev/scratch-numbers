@@ -78,23 +78,39 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr class="bg-gray-700 border-b boder-gray-900">
-                            <td class="px-6 py-4 text-sm font-medium text-white whitespace-nowrap">
-                              Dark
-                            </td>
-                            <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
-                              Cell
-                            </td>
-                            <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
-                              Cell
-                            </td>
-                            <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
-                              Cell
-                            </td>
-                            <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
-                              Cell
-                            </td>
-                          </tr>
+                            {{-- @dd($groups) --}}
+                            @foreach($groups['local'] as $group)
+                                <tr class="bg-gray-700 border-b boder-gray-900">
+                                    <td class="px-6 py-4 text-sm font-medium text-white whitespace-nowrap">
+                                        {{ \App\Models\Company::find($group->company_id)->name }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
+                                        {{ $group->total }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
+                                        {{ $group->used_count }}
+                                    </td>
+                                    @foreach($groups['global'] as $INTgroup)
+                                        @if($INTgroup->company_id == $group->company_id )
+                                            <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
+                                                {{ $INTgroup->total }}
+                                            </td>
+                                            <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
+                                                {{ $INTgroup->used_count }}
+                                            </td>
+                                        @else
+                                            @once
+                                                <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
+                                                    {{ 0 }}
+                                                </td>
+                                                <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
+                                                    {{ 0 }}
+                                                </td>
+                                            @endonce
+                                        @endif
+                                    @endforeach
+                                </tr>
+                            @endforeach
                         </tbody>
                       </table>
                     {{-- <div>
