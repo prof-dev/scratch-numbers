@@ -52,16 +52,18 @@ class DashboardController extends Controller
         // dd($request);
        $localCodes= DB::table('scratch_codes')
              ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
-             ->select('export_batches.company_id as company_id', DB::raw('count(scratch_codes.id) as total'),DB::raw('sum(scratch_codes.status) as used_count'))
+             ->join('companies','companies.id','=','export_batches.company_id')
+             ->select('companies.name as company_name', DB::raw('count(scratch_codes.id) as total'),DB::raw('sum(scratch_codes.status) as used_count'))
              ->where('scratch_codes.type',"SDN")
-
-             ->groupBy('company_id')
+             
+             ->groupBy('name')
              ->get();
              $InternationalCodes= DB::table('scratch_codes')
              ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
-             ->select('export_batches.company_id as company_id', DB::raw('count(scratch_codes.id) as total'),DB::raw('sum(scratch_codes.status) as used_count'))
+             ->join('companies','companies.id','=','export_batches.company_id')
+             ->select('companies.name as company_name', DB::raw('count(scratch_codes.id) as total'),DB::raw('sum(scratch_codes.status) as used_count'))
              ->where('scratch_codes.type',"INT")
-             ->groupBy('company_id')
+             ->groupBy('name')
              ->get();
 
         $result=[
