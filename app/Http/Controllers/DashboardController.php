@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -48,26 +49,35 @@ class DashboardController extends Controller
     {
         # code...
         // dd($request);
-        // $result=ScratchCode::where("type","SDN")->select(["count(id) as total","sum(status) as activated"])->groupBy("company_id")->with("company")->get();
-        $exportPatchesWithCompanyName = ExportPatch::where("company_id",$request['company'])->get();
-        $resultNotUsedWithTypeSDN = $this->getNotUsedWithTypeSDN($exportPatchesWithCompanyName, $request);
-        $resultNotUsedWithOtherTypes = $this->getNotUsedWithOtherTypes($exportPatchesWithCompanyName, $request);
+       $localCodes= DB::table('scratch_codes')
+             ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
+             ->select('export_batches.company_id as company_id', DB::raw('count(scratch_codes.id) as total'),DB::raw('sum(scratch_codes.status) as used_count'))
+             ->where('scratch_codes.type',"SDN")
+             
+             ->groupBy('company_id')
+             ->get();
+             $InternationalCodes= DB::table('scratch_codes')
+             ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
+             ->select('export_batches.company_id as company_id', DB::raw('count(scratch_codes.id) as total'),DB::raw('sum(scratch_codes.status) as used_count'))
+             ->where('scratch_codes.type',"INT")
+             
+             ->groupBy('company_id')
+             ->get();
 
-        $countInternational = $this->getCountInternational($exportPatchesWithCompanyName, $request);
+        $result=[
+            "local"=>$localCodes,
+            "global"=>$InternationalCodes
+        ];
 
-        // dd($resultNotUsedWithOtherTypes);
+        dd($result);
 
-        // if(isset($request->dateFrom)&&isset($request->dateTo)){
+        if(isset($request->dateFrom)&&isset($request->dateTo)){
 
-        // }
+        }
 
-        return view('admin.home_dashboard', [
-            'companies' => Company::all(),
-            'company' => Company::find($request['company']),
-            'local_used' => $resultNotUsedWithTypeSDN,
-            'international_used' => $resultNotUsedWithOtherTypes,
-            // 'international_codes_count' =>
-        ]);
+        return view('admin.home_dashboard', 
+            
+        $result);
     }
 
 
