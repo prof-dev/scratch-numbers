@@ -60,7 +60,6 @@ class DashboardController extends Controller
              ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
              ->select('export_batches.company_id as company_id', DB::raw('count(scratch_codes.id) as total'),DB::raw('sum(scratch_codes.status) as used_count'))
              ->where('scratch_codes.type',"INT")
-             
              ->groupBy('company_id')
              ->get();
 
@@ -69,11 +68,15 @@ class DashboardController extends Controller
             "global"=>$InternationalCodes
         ];
 
-        dd($result);
 
-        if(isset($request->dateFrom)&&isset($request->dateTo)){
+        if(isset($request['start_date'])&&isset($request['end_date'])){
+           
 
         }
+
+        dd($result);
+
+
 
         return view('admin.home_dashboard', 
             
