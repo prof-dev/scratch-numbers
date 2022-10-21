@@ -82,7 +82,7 @@
                             @foreach($groups['local'] as $group)
                                 <tr class="bg-gray-700 border-b boder-gray-900">
                                     <td class="px-6 py-4 text-sm font-medium text-white whitespace-nowrap">
-                                        {{ \App\Models\Company::find($group->company_id)->name }}
+                                        {{ $group->company_name }}
                                     </td>
                                     <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
                                         {{ $group->total }}
@@ -91,7 +91,7 @@
                                         {{ $group->used_count }}
                                     </td>
                                     @foreach($groups['global'] as $INTgroup)
-                                        @if($INTgroup->company_id == $group->company_id )
+                                        @if($INTgroup->company_name == $group->company_name )
                                             <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
                                                 {{ $INTgroup->total }}
                                             </td>
