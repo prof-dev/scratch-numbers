@@ -33,7 +33,7 @@ class DashboardController extends Controller
     public function indexDate(Request $request): View{
         return view('admin.date_dashboard', [
             'companies' => Company::all(),
-            'groups' => $this->groupByCompanyBetweenTwoDates(request())
+            'groups' => $this->groupByDateWhereCompanyIs(request())
         ]);
     }
 
@@ -213,51 +213,84 @@ class DashboardController extends Controller
         return $result;
     }
 
-
-    private function getNotUsedWithOtherTypes(EloquentCollection $exportPatchesWithCompanyName , array $request){
-        $resultNotUsedWithOtherTypes = collect();
-        foreach($exportPatchesWithCompanyName as $exportPatch){
-            $resultNotUsedWithOtherTypes =
-            $resultNotUsedWithOtherTypes->concat(
-                $exportPatch->NotUsedWithTypesExcept("SDN")
-                ->whereBetween(
-                    'created_at',
-                    [
-                        date( 'Y-m-d 00:00:00' , strtotime($request['start_date'])),
-                        date('Y-m-d 00:00:00' , strtotime($request['end_date']))
-                    ]
-                )
-            );
-        }
-
-        return $resultNotUsedWithOtherTypes;
-    }
-
-    private function getNotUsedWithTypeSDN(EloquentCollection $exportPatchesWithCompanyName , array $request ): Collection{
-        $resultNotUsedWithType = collect();
-        foreach($exportPatchesWithCompanyName as $exportPatch){
-            $resultNotUsedWithType =
-            $resultNotUsedWithType->concat(
-                $exportPatch->NotUsedWithType("SDN")
-                ->whereBetween(
-                    'created_at',
-                    [
-                        date( 'Y-m-d 00:00:00' , strtotime($request['start_date'])),
-                        date('Y-m-d 00:00:00' , strtotime($request['end_date']))
-                    ]
-                )
-            );
-        }
-
-        return $resultNotUsedWithType;
-    }
-
     private function groupByDateWhereCompanyIs(Request $request)
     {
         # code...
-        $result=ScratchCode::where("companyId",$request->companyId)->where("type","SDN")->select(["count(id) as total","sum(status) as activated"])->groupBy("created_at")->with("company")->get();
-        dd($result);
+        // $result=ScratchCode::where("companyId",$request->companyId)->where("type","SDN")->select(["count(id) as total","sum(status) as activated"])->groupBy("created_at")->with("company")->get();
+
+        if (isset($request['company'])) {
+            $localCodes = DB::table('scratch_codes')
+                ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
+                ->join('companies', 'companies.id', '=', 'export_batches.company_id')
+                ->select(
+                    'scratch_codes.created_at as date',
+                    DB::raw('count(scratch_codes.id) as total'),
+                    DB::raw('sum(scratch_codes.status) as used_count'),
+                )
+                ->where('scratch_codes.type', "SDN")
+                ->where('companies.id', $request['company'])
+                ->groupBy('date')
+                ->get();
+
+            $InternationalCodes = DB::table('scratch_codes')
+                ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
+                ->join('companies', 'companies.id', '=', 'export_batches.company_id')
+                ->select(
+                    'scratch_codes.created_at as date',
+                    DB::raw('count(scratch_codes.id) as total'),
+                    DB::raw('sum(scratch_codes.status) as used_count')
+                )
+                ->where('scratch_codes.type', "INT")
+                ->where('companies.id', $request['company'])
+                ->groupBy('date')
+                ->get();
+
+            return [
+                "local" => $localCodes,
+                "global" => $InternationalCodes
+            ];
+        } else {
+            $localCodes = DB::table('scratch_codes')
+                ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
+                ->join('companies', 'companies.id', '=', 'export_batches.company_id')
+                ->select(
+                    'scratch_codes.created_at as date',
+                    DB::raw('count(scratch_codes.id) as total'),
+                    DB::raw('sum(scratch_codes.status) as used_count'),
+                )
+                ->where('scratch_codes.type', "SDN")
+                // ->where('companies.id', $request['company'])
+                ->groupBy('date')
+                ->get();
+
+            $InternationalCodes = DB::table('scratch_codes')
+                ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
+                ->join('companies', 'companies.id', '=', 'export_batches.company_id')
+                ->select(
+                    'scratch_codes.created_at as date',
+                    DB::raw('count(scratch_codes.id) as total'),
+                    DB::raw('sum(scratch_codes.status) as used_count')
+                )
+                ->where('scratch_codes.type', "INT")
+                // ->where('companies.id', $request['company'])
+                ->groupBy('date')
+                ->get();
+
+            return [
+                "local" => $localCodes,
+                "global" => $InternationalCodes
+            ];
+        }
+
+        // dd($result);
 
     }
 
+    public function dateStats(Request $request)
+    {
+        return view('admin.date_dashboard', [
+            'companies' => Company::all(),
+            'groups' => $this->groupByDateWhereCompanyIs(request())
+        ]);
+    }
 }
