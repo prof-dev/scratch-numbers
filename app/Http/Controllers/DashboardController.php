@@ -26,6 +26,18 @@ class DashboardController extends Controller
     }
 
     /**
+     * Display the first page of dashboard.
+     *
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function indexDate(Request $request): View{
+        return view('admin.date_dashboard', [
+            'companies' => Company::all(),
+            'groups' => $this->groupByCompanyBetweenTwoDates(request())
+        ]);
+    }
+
+    /**
      * Display the stats of the company
      *
      * @return \Illuminate\Contracts\View\View
