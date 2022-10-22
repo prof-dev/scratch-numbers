@@ -24,11 +24,6 @@ Auth::routes(
 );
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-Route::get('/dashboard/date', [App\Http\Controllers\DashboardController::class, 'indexDate'])->name('dashboard');
-Route::post('/dashboard/date/company', [App\Http\Controllers\DashboardController::class, 'dateStats'])->name('dashboardDate');
-Route::post('/dashboard/company', [App\Http\Controllers\DashboardController::class, 'companyStats'])->name('dashboardCompany');
-
 Route::middleware('auth')->group(
     function () {
         Route::get('/company', [App\Http\Controllers\CompanyController::class, 'index'])->name('company')->can('viewAny', \App\Models\Company::class);
@@ -42,5 +37,12 @@ Route::middleware('auth')->group(
         Route::post('/scratch_codes_batches', [\App\Http\Controllers\ScratchCodesController::class, 'store'])->name('create_batch');
         Route::delete('/scratch_codes_batches/{export_patch}', [\App\Http\Controllers\BatchDetailsController::class, 'destroy'])->name('delete_batch');
         Route::post('/users/create', [\App\Http\Controllers\UserController::class, 'store'])->name('create_user')->can('create', \App\Models\User::class);
+
+        // dashboard routes
+        Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard/date', [App\Http\Controllers\DashboardController::class, 'indexDate'])->name('dashboard');
+        Route::post('/dashboard/date/company', [App\Http\Controllers\DashboardController::class, 'dateStats'])->name('dashboardDate');
+        Route::post('/dashboard/company', [App\Http\Controllers\DashboardController::class, 'companyStats'])->name('dashboardCompany');
+
     }
 );
