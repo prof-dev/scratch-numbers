@@ -19,8 +19,11 @@ class ScratchCodeFactory extends Factory
     {
         return [
             'code' => 'TSD'.$this->faker->unique()->randomNumber(6),
-            'status' => false,
-            'type' => $this->faker->countryCode(),
+            'status' => true,
+            'type' => 'INT',
+            'bar_code' => $this->faker->isbn13(),
+            'consumed_by' => '1',
+            //  $this->faker->countryCode(),
             'export_batch_id' => ExportPatch::factory(1)->create()->first()->id,
         ];
     }
