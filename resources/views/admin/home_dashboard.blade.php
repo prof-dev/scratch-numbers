@@ -16,16 +16,25 @@
                                 data-mdb-toggle-button="false">
                                 <input type="date"
                                     class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Select a date" data-mdb-toggle="datepicker" name="start_date"
-                                    required />
+                                    placeholder="Select a date" data-mdb-toggle="datepicker" name="start_date" />
                                 <label for="floatingInput" class="text-gray-700">Select start date</label>
+                                @error('start_date')
+                                    <span class="text-red-600" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="relative px-2 mb-3 datepicker form-floating xl:w-1/2"
                                 data-mdb-toggle-button="false">
                                 <input type="date"
                                     class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Select a date" data-mdb-toggle="datepicker" name="end_date" required />
+                                    placeholder="Select a date" data-mdb-toggle="datepicker" name="end_date" />
                                 <label for="floatingInput" class="text-gray-700">Select end date</label>
+                                @error('end_date')
+                                    <span class="text-red-600" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         {{-- <div class="flex items-center justify-center">
@@ -35,13 +44,18 @@
                             <div class="relative mb-3 datepicker form-floating xl:w-96" data-mdb-toggle-button="false">
                                 <select
                                     class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Select a date" name="company" required>
+                                    placeholder="Select a date" name="company">
                                     <option value="">select a company</option>
                                     @foreach ( $companies as $company )
                                     <option value="{{ $company->id }}">{{ $company->name }}</option>
                                     @endforeach
                                 </select>
                                 <label for="floatingInput" class="text-gray-700">Select a company</label>
+                                @error('company')
+                                    <span class="text-red-600" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="flex items-center gap-x-2">
