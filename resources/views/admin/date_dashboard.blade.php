@@ -8,7 +8,7 @@
             <div class="p-8 mb-5 bg-white rounded-3xl">
                 <h1 class="mb-10 text-xl font-bold">Select Company to find a report by date</h1>
                 <div class="flex items-center justify-between w-full">
-                    <form action="{{ route('dashboardCompany') }}" method="POST">
+                    <form action="{{ route('dashboardDate') }}" method="POST">
                         @csrf
                         @method("POST")
                         {{-- <div class="flex items-center justify-center">
@@ -64,7 +64,7 @@
                             @foreach($groups['local'] as $group)
                             <tr class="bg-gray-700 border-b boder-gray-900">
                                 <td class="px-6 py-4 text-sm font-medium text-white whitespace-nowrap">
-                                    {{ $group->company_name }}
+                                    {{ $group->date }}
                                 </td>
                                 <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
                                     {{ $group->total }}
@@ -99,7 +99,7 @@
                             @foreach($groups['global'] as $group)
                             <tr class="bg-gray-700 border-b boder-gray-900">
                                 <td class="px-6 py-4 text-sm font-medium text-white whitespace-nowrap">
-                                    {{ $group->company_name }}
+                                    {{ $group->date }}
                                 </td>
                                 <td class="px-6 py-4 text-sm font-light text-white whitespace-nowrap">
                                     {{ $group->total }}
