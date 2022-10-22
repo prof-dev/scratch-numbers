@@ -56,7 +56,8 @@
                 <hr class="my-10">
 
                 <div class="w-1/3">
-                    <table class="min-w-full text-center">
+                    <table class="min-w-full text-center mb-10">
+                        <h1 class="text-xl text-gray-900 underline uppercase">{{ __('Local Codes') }}</h1>
                         <thead class="border-b">
                             <tr>
                                 <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900">
@@ -90,7 +91,8 @@
                 </div>
 
                 <div class="w-1/3">
-                    <table class="min-w-full text-center">
+                    <h1 class="text-xl text-gray-900 underline uppercase">{{ __('International Codes') }}</h1>
+                    <table class="min-w-full text-center mb-10">
                         <thead class="border-b">
                             <tr>
                                 <th scope="col" class="px-6 py-4 text-sm font-medium text-gray-900">
