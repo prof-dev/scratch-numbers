@@ -26,7 +26,7 @@ Auth::routes(
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 Route::get('/dashboard/date', [App\Http\Controllers\DashboardController::class, 'indexDate'])->name('dashboard');
-// Route::post('/dashboard/date/company', [App\Http\Controllers\DashboardController::class, 'companyStats'])->name('dashboardCompany');
+Route::post('/dashboard/date/company', [App\Http\Controllers\DashboardController::class, 'dateStats'])->name('dashboardDate');
 Route::post('/dashboard/company', [App\Http\Controllers\DashboardController::class, 'companyStats'])->name('dashboardCompany');
 
 Route::middleware('auth')->group(
