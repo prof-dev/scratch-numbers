@@ -70,6 +70,12 @@
                                                         document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
+                                            @if (isIshraqAdmin())
+                                            <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                                href="{{ route('dashboard') }}">
+                                                    {{ __('Dashboard') }}
+                                            </a>
+                                            @endif
                                         @else
                                         <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('home') }}">
                                             {{ __('Home') }}
