@@ -39,10 +39,10 @@ Route::middleware('auth')->group(
         Route::post('/users/create', [\App\Http\Controllers\UserController::class, 'store'])->name('create_user')->can('create', \App\Models\User::class);
 
         // dashboard routes
-        Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/dashboard/date', [App\Http\Controllers\DashboardController::class, 'indexDate'])->name('dashboard');
-        Route::post('/dashboard/date/company', [App\Http\Controllers\DashboardController::class, 'dateStats'])->name('dashboardDate');
-        Route::post('/dashboard/company', [App\Http\Controllers\DashboardController::class, 'companyStats'])->name('dashboardCompany');
+        Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard')->middleware('dashboard');
+        Route::get('/dashboard/date', [App\Http\Controllers\DashboardController::class, 'indexDate'])->name('dashboardIndexDate')->middleware('dashboard');
+        Route::post('/dashboard/date/company', [App\Http\Controllers\DashboardController::class, 'dateStats'])->name('dashboardDate')->middleware('dashboard');
+        Route::post('/dashboard/company', [App\Http\Controllers\DashboardController::class, 'companyStats'])->name('dashboardCompany')->middleware('dashboard');
 
     }
 );
