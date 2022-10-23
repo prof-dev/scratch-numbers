@@ -47,8 +47,8 @@ class DashboardController extends Controller
         $validated = $request->validate(
             [
                 'company' => ['numeric', 'nullable'],
-                'start_date' => ['date','required_with:end_date'],
-                'end_date' => ['date','required_with:start_date']
+                'start_date' => ['date','required_with:end_date', 'nullable'],
+                'end_date' => ['date','required_with:start_date', 'nullable']
             ]
         );
 
