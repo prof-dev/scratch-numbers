@@ -87,7 +87,7 @@ class DashboardController extends Controller
                         ->where('scratch_codes.type', "SDN")
                         ->where('companies.id', $request['company'])
                         ->whereBetween(
-                            'scratch_codes.created_at',
+                            'export_batches.created_at',
                             [
                                 date('Y-m-d 00:00:00', strtotime($request['start_date'])),
                                 date('Y-m-d 00:00:00', strtotime($request['end_date']))
@@ -103,7 +103,7 @@ class DashboardController extends Controller
                     ->where('scratch_codes.type', "INT")
                     ->where('companies.id', $request['company'])
                     ->whereBetween(
-                        'scratch_codes.created_at',
+                        'export_batches.created_at',
                         [
                             date('Y-m-d 00:00:00', strtotime($request['start_date'])),
                             date('Y-m-d 00:00:00', strtotime($request['end_date']))
@@ -226,7 +226,7 @@ class DashboardController extends Controller
                 ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
                 ->join('companies', 'companies.id', '=', 'export_batches.company_id')
                 ->select(
-                    'scratch_codes.created_at as date',
+                    'export_batches.created_at as date',
                     DB::raw('count(scratch_codes.id) as total'),
                     DB::raw('sum(scratch_codes.status) as used_count'),
                 )
@@ -239,7 +239,7 @@ class DashboardController extends Controller
                 ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
                 ->join('companies', 'companies.id', '=', 'export_batches.company_id')
                 ->select(
-                    'scratch_codes.created_at as date',
+                    'export_batches.created_at as date',
                     DB::raw('count(scratch_codes.id) as total'),
                     DB::raw('sum(scratch_codes.status) as used_count')
                 )
@@ -257,7 +257,7 @@ class DashboardController extends Controller
                 ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
                 ->join('companies', 'companies.id', '=', 'export_batches.company_id')
                 ->select(
-                    'scratch_codes.created_at as date',
+                    'export_batches.created_at as date',
                     DB::raw('count(scratch_codes.id) as total'),
                     DB::raw('sum(scratch_codes.status) as used_count'),
                 )
@@ -270,7 +270,7 @@ class DashboardController extends Controller
                 ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
                 ->join('companies', 'companies.id', '=', 'export_batches.company_id')
                 ->select(
-                    'scratch_codes.created_at as date',
+                    'export_batches.created_at as date',
                     DB::raw('count(scratch_codes.id) as total'),
                     DB::raw('sum(scratch_codes.status) as used_count')
                 )
