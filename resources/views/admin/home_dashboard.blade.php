@@ -68,8 +68,25 @@
                 </div>
 
                 <hr class="my-10">
-
-                <div class="w-1/3">
+                @if (isset($start_date) || isset($end_date) || isset($company_name))
+                    <div class="w-full">
+                        <h4>Search Credentials</h4>
+                        @if (isset($start_date) && isset($end_date))
+                            <div class="w-full flex flex-col mb-3">
+                                <div class="mb-1 text-gray-400">Starting from date:<span class="ml-2 text-black">{{ $start_date }}</span></div>
+                                <div class="mb-1 text-gray-400">Ending to date:<span class="ml-2 text-black">{{ $end_date  }}</span></div>
+                            </div>
+                        @endif
+                        @if (isset($company_name))
+                        <div class="w-full flex flex-col mb-3">
+                            <div class="mb-1 text-gray-400">Searching in company:<span class="ml-2 text-black">
+                                {{ $company_name->name }}
+                            </span></div>
+                        </div>
+                        @endif
+                    </div>
+                @endif
+                <div class="w-full">
                     <table class="min-w-full text-center mb-10">
                         <h1 class="text-xl text-gray-900 underline uppercase">{{ __('Local Codes') }}</h1>
                         <thead class="border-b">
@@ -104,7 +121,7 @@
                     </table>
                 </div>
 
-                <div class="w-1/3">
+                <div class="w-full">
                     <h1 class="text-xl text-gray-900 underline uppercase">{{ __('International Codes') }}</h1>
                     <table class="min-w-full text-center mb-10">
                         <thead class="border-b">

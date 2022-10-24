@@ -57,10 +57,13 @@ class DashboardController extends Controller
         // dd(date( 'Y-m-d 00:00:00' , strtotime($validated['start_date'])));
         $arrayOfGroups = collect($this->groupByCompanyBetweenTwoDates($validated));
 
-
+// dd(Company::find($validated['company']));
         return view('admin.home_dashboard', [
             'companies' => Company::all(),
-            'groups' => $arrayOfGroups
+            'groups' => $arrayOfGroups,
+            'start_date' => $validated['start_date'],
+            'end_date' => $validated['end_date'],
+            'company_name' => Company::find($validated['company'])
         ]);
 
     }
