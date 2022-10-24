@@ -21,7 +21,10 @@
                                     placeholder="Select a date" name="company">
                                     <option value="">select a company</option>
                                     @foreach ( $companies as $company )
-                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                    @if (old('company') == $company->id)
+                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
+                                    @endif
+                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
                                     @endforeach
                                 </select>
                                 <label for="floatingInput" class="text-gray-700">Select a company</label>
