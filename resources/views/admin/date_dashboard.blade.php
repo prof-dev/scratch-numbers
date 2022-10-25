@@ -10,34 +10,34 @@
                 <div class="flex items-center justify-between w-full">
                     <form action="{{ route('dashboardDate') }}" method="POST">
                         @csrf
-                        @method("POST")
+                        @method("GET")
                         {{-- <div class="flex items-center justify-center">
 
                         </div> --}}
                         <div class="flex items-center justify-center">
                             <div class="relative mb-3 datepicker form-floating xl:w-96" data-mdb-toggle-button="false">
-                                <select
-                                    class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Select a date" name="company">
+                                <select class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Select a date" name="company">
                                     <option value="">select a company</option>
                                     @foreach ( $companies as $company )
-                                    @if (old('company') == $company->id)
-                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
-                                    @endif
-                                        <option value="{{ $company->id }}">{{ $company->name }}</option>
-                                    @endforeach
+                                    @if(Session::get('company')==$company->id )
+
+                                    <option value="{{ $company->id }}" selected>{{ $company->name }}</option>
+
+                                    @else
+                                    <option value="{{ $company->id }}">{{ $company->name }}</option>
+
+                                    @endif @endforeach
                                 </select>
                                 <label for="floatingInput" class="text-gray-700">Select a company</label>
                                 @error('company')
-                                    <span class="text-red-600" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="text-red-600" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
                         <div class="flex items-center gap-x-2">
-                            <button type="submit" name="submit"
-                                class="inline-flex items-center justify-center px-5 text-sm font-semibold text-gray-300 transition bg-gray-900 h-9 rounded-xl hover:text-white">
+                            <button type="submit" name="submit" class="inline-flex items-center justify-center px-5 text-sm font-semibold text-gray-300 transition bg-gray-900 h-9 rounded-xl hover:text-white">
                                 Submit
                             </button>
                         </div>

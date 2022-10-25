@@ -226,6 +226,8 @@ class DashboardController extends Controller
         // $result=ScratchCode::where("companyId",$request->companyId)->where("type","SDN")->select(["count(id) as total","sum(status) as activated"])->groupBy("created_at")->with("company")->get();
 
         if (isset($request['company'])) {
+            session()->put("company",$request['company']);
+
             $localCodes = DB::table('scratch_codes')
                 ->join('export_batches', 'export_batches.id', '=', 'scratch_codes.export_batch_id')
                 ->join('companies', 'companies.id', '=', 'export_batches.company_id')

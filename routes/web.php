@@ -41,8 +41,8 @@ Route::middleware('auth')->group(
         // dashboard routes
         Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard')->middleware('dashboard');
         Route::get('/dashboard/date', [App\Http\Controllers\DashboardController::class, 'indexDate'])->name('dashboardIndexDate')->middleware('dashboard');
-        Route::post('/dashboard/date/company', [App\Http\Controllers\DashboardController::class, 'dateStats'])->name('dashboardDate')->middleware('dashboard');
-        Route::post('/dashboard/company', [App\Http\Controllers\DashboardController::class, 'companyStats'])->name('dashboardCompany')->middleware('dashboard');
+        Route::get('/dashboard/date/company', [App\Http\Controllers\DashboardController::class, 'dateStats'])->name('dashboardDate')->middleware('dashboard');
+        Route::get('/dashboard/company', [App\Http\Controllers\DashboardController::class, 'companyStats'])->name('dashboardCompany')->middleware('dashboard');
 
     }
 );

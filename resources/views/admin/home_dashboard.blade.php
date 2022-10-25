@@ -10,7 +10,7 @@
                 <div class="flex items-center justify-between w-full">
                     <form action="{{ route('dashboardCompany') }}" method="POST">
                         @csrf
-                        @method("POST")
+                        @method("GET")
                         <div class="flex items-center justify-around w-full">
                             <div class="relative px-3 mb-3 datepicker form-floating xl:w-1/2" data-mdb-toggle-button="false">
                                 <input type="date" class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Select a date" data-mdb-toggle="datepicker" name="start_date" value={!! Session::get("start_date") !!} />
