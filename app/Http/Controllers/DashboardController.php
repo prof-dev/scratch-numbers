@@ -89,7 +89,7 @@ class DashboardController extends Controller
                         DB::raw('sum(scratch_codes.status) as used_count'),
                     )
                         ->where('scratch_codes.type', "SDN")
-                        ->where('companies.id', $request['company'])
+                        ->where('export_batches.company_id', $request['company'])
                         ->whereBetween(
                             'export_batches.created_at',
                             [
@@ -105,7 +105,7 @@ class DashboardController extends Controller
                     ->join('companies', 'companies.id', '=', 'export_batches.company_id')
                     ->select('companies.name as company_name', DB::raw('count(scratch_codes.id) as total'), DB::raw('sum(scratch_codes.status) as used_count'))
                     ->where('scratch_codes.type', "INT")
-                    ->where('companies.id', $request['company'])
+                    ->where('export_batches.company_id', $request['company'])
                     ->whereBetween(
                         'export_batches.created_at',
                         [
@@ -169,7 +169,7 @@ class DashboardController extends Controller
                 DB::raw('sum(scratch_codes.status) as used_count'),
             )
                 ->where('scratch_codes.type', "SDN")
-                ->where('companies.id', $request['company'])
+                ->where('export_batches.company_id', $request['company'])
                 ->groupBy('name')
                 ->get();
 
@@ -178,7 +178,7 @@ class DashboardController extends Controller
             ->join('companies', 'companies.id', '=', 'export_batches.company_id')
             ->select('companies.name as company_name', DB::raw('count(scratch_codes.id) as total'), DB::raw('sum(scratch_codes.status) as used_count'))
             ->where('scratch_codes.type', "INT")
-            ->where('companies.id', $request['company'])
+            ->where('export_batches.company_id', $request['company'])
             ->groupBy('name')
             ->get();
             return $result = [
@@ -235,7 +235,7 @@ class DashboardController extends Controller
                     DB::raw('sum(scratch_codes.status) as used_count'),
                 )
                 ->where('scratch_codes.type', "SDN")
-                ->where('companies.id', $request['company'])
+                ->where('export_batches.company_id', $request['company'])
                 ->groupBy('date')
                 ->get();
 
@@ -248,7 +248,7 @@ class DashboardController extends Controller
                     DB::raw('sum(scratch_codes.status) as used_count')
                 )
                 ->where('scratch_codes.type', "INT")
-                ->where('companies.id', $request['company'])
+                ->where('export_batches.company_id', $request['company'])
                 ->groupBy('date')
                 ->get();
 
@@ -266,7 +266,7 @@ class DashboardController extends Controller
                     DB::raw('sum(scratch_codes.status) as used_count'),
                 )
                 ->where('scratch_codes.type', "SDN")
-                // ->where('companies.id', $request['company'])
+                // ->where('export_batches.company_id', $request['company'])
                 ->groupBy('date')
                 ->get();
 
@@ -279,7 +279,7 @@ class DashboardController extends Controller
                     DB::raw('sum(scratch_codes.status) as used_count')
                 )
                 ->where('scratch_codes.type', "INT")
-                // ->where('companies.id', $request['company'])
+                // ->where('export_batches.company_id', $request['company'])
                 ->groupBy('date')
                 ->get();
 
