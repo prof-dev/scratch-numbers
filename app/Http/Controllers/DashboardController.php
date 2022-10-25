@@ -73,7 +73,11 @@ class DashboardController extends Controller
         # code...
         // dd($request);
         if (isset($request['start_date']) && isset($request['end_date'])) {
+            session()->put("start_date",$request['start_date']);
+            session()->put("end_date",$request['end_date']);
             if (isset($request['company'])) {
+            session()->put("company",$request['company']);
+
                 // dd($request);
                 if (isset($request['start_date']) && isset($request['end_date'])) {
                     $localCodes = DB::table('scratch_codes')

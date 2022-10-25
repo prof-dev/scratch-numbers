@@ -12,28 +12,22 @@
                         @csrf
                         @method("POST")
                         <div class="flex items-center justify-around w-full">
-                            <div class="relative px-3 mb-3 datepicker form-floating xl:w-1/2"
-                                data-mdb-toggle-button="false">
-                                <input type="date"
-                                    class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Select a date" data-mdb-toggle="datepicker" name="start_date" />
+                            <div class="relative px-3 mb-3 datepicker form-floating xl:w-1/2" data-mdb-toggle-button="false">
+                                <input type="date" class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Select a date" data-mdb-toggle="datepicker" name="start_date" value={!! Session::get("start_date") !!} />
                                 <label for="floatingInput" class="text-gray-700">Select start date</label>
                                 @error('start_date')
-                                    <span class="text-red-600" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="text-red-600" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
-                            <div class="relative px-2 mb-3 datepicker form-floating xl:w-1/2"
-                                data-mdb-toggle-button="false">
-                                <input type="date"
-                                    class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Select a date" data-mdb-toggle="datepicker" name="end_date" />
+                            <div class="relative px-2 mb-3 datepicker form-floating xl:w-1/2" data-mdb-toggle-button="false">
+                                <input type="date" class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Select a date" data-mdb-toggle="datepicker" name="end_date" value={!! Session::get("end_date") !!} />
                                 <label for="floatingInput" class="text-gray-700">Select end date</label>
                                 @error('end_date')
-                                    <span class="text-red-600" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="text-red-600" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -42,25 +36,29 @@
                         </div> --}}
                         <div class="flex items-center justify-center">
                             <div class="relative mb-3 datepicker form-floating xl:w-96" data-mdb-toggle-button="false">
-                                <select
-                                    class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                    placeholder="Select a date" name="company">
+                                <select class="form-control rounded-lg block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Select a date" name="company">
                                     <option value="">select a company</option>
                                     @foreach ( $companies as $company )
+                                    @if(Session::get('company')==$company->id )
+
+                                    <option value="{{ $company->id }}" selected>{{ $company->name }}</option>
+
+                                    @else
                                     <option value="{{ $company->id }}">{{ $company->name }}</option>
+
+                                    @endif
                                     @endforeach
                                 </select>
                                 <label for="floatingInput" class="text-gray-700">Select a company</label>
                                 @error('company')
-                                    <span class="text-red-600" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="text-red-600" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
                         <div class="flex items-center gap-x-2">
-                            <button type="submit" name="submit"
-                                class="inline-flex items-center justify-center px-5 text-sm font-semibold text-gray-300 transition bg-gray-900 h-9 rounded-xl hover:text-white">
+                            <button type="submit" name="submit" class="inline-flex items-center justify-center px-5 text-sm font-semibold text-gray-300 transition bg-gray-900 h-9 rounded-xl hover:text-white">
                                 Submit
                             </button>
                         </div>
@@ -68,24 +66,7 @@
                 </div>
 
                 <hr class="my-10">
-                @if (isset($start_date) || isset($end_date) || isset($company_name))
-                    <div class="w-full">
-                        <h4>Search Credentials</h4>
-                        @if (isset($start_date) && isset($end_date))
-                            <div class="w-full flex flex-col mb-3">
-                                <div class="mb-1 text-gray-400">Starting from date:<span class="ml-2 text-black">{{ $start_date }}</span></div>
-                                <div class="mb-1 text-gray-400">Ending to date:<span class="ml-2 text-black">{{ $end_date  }}</span></div>
-                            </div>
-                        @endif
-                        @if (isset($company_name))
-                        <div class="w-full flex flex-col mb-3">
-                            <div class="mb-1 text-gray-400">Searching in company:<span class="ml-2 text-black">
-                                {{ $company_name->name }}
-                            </span></div>
-                        </div>
-                        @endif
-                    </div>
-                @endif
+             
                 <div class="w-full">
                     <table class="min-w-full text-center mb-10">
                         <h1 class="text-xl text-gray-900 underline uppercase">{{ __('Local Codes') }}</h1>
