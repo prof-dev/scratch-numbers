@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResetCodeRequest;
 use App\Models\ScratchCode;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -58,6 +59,8 @@ class ScartchController extends Controller
     {
         //
     }
+
+    
 
     /**
      * Remove the specified resource from storage.

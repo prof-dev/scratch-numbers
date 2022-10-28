@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GenerateRequest;
+use App\Http\Requests\ResetCodeRequest;
 use App\Http\Resources\GenerateResponse;
 use App\Models\Company;
 use App\Models\ExportPatch;
@@ -58,6 +59,22 @@ class ScratchCodesController extends Controller
         current_user()->destroyToken();
 
         return response()->json(['data' => GenerateResponse::collection($scratchCodes)], 200);
+    }
+
+    public function resetCode(ResetCodeRequest $request){
+        $code=ScratchCode::where('code',$request->code)->first();
+      
+
+        $code->status=0;
+        $code->update();
+        return view("reset_code",["message"=>"Code ".$request->code." is reseted to not used successfully the old mint account id is ".$code->consumed_by]);
+
+    }
+
+    public function reset(Request $request){
+       
+        return view("reset_code",["message"=>""]);
+
     }
 
     /**

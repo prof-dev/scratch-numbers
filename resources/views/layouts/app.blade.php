@@ -75,6 +75,10 @@
                                                 href="{{ route('dashboard') }}">
                                                     {{ __('Dashboard') }}
                                             </a>
+                                            <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                                href="{{ route('reset') }}">
+                                                    {{ __('Reset Code') }}
+                                            </a>
                                             @endif
                                         @else
                                         <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('home') }}">
