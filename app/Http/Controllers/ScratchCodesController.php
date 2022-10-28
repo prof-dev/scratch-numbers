@@ -7,6 +7,7 @@ use App\Http\Requests\ResetCodeRequest;
 use App\Http\Resources\GenerateResponse;
 use App\Models\Company;
 use App\Models\ExportPatch;
+use App\Models\ResetHistory;
 use App\Models\ScratchCode;
 use App\Rules\Uppercase;
 use Illuminate\Http\Request;
@@ -63,6 +64,21 @@ class ScratchCodesController extends Controller
 
     public function resetCode(ResetCodeRequest $request){
         $code=ScratchCode::where('code',$request->code)->first();
+
+        $resetHistory=ResetHistory::where("code",$request->code)->count();
+
+        if($resetHistory>=env("max_reset_time")){
+            return view("reset_code",["message"=>"This Code has already been reseted before"]);
+        }
+
+        $resetObject=new ResetHistory();
+        $resetObject->code=$request->code;
+        $resetObject->user_id=auth()->user()->id;
+        $resetObject->user_name=auth()->user()->name;
+        $resetObject->company_id=auth()->user()->company_id;
+        $resetObject->consumed_by=$code->consumed_by;
+
+        $resetObject->save();
       
 
         $code->status=0;
