@@ -45,11 +45,12 @@
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
+                                @if (!(Route::current()->getName() == 'login'))
+                                    <li class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    </li>
+                                @endif
                             @endif
-
                             @if (Route::has('register'))
                                 <li class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
