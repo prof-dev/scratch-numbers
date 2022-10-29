@@ -34,7 +34,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button> --}}
 
-                <div class="flex items-center w-24" >
+                <div class="flex items-center" >
                     <!-- Left Side Of Navbar -->
                     {{-- <ul class="navbar-nav me-auto">
 
@@ -57,6 +57,8 @@
                                 </li>
                             @endif
                         @else
+
+                        @if (Route::current()->getName() == 'home')
                             <li class="flex items-center justify-between">
                                 {{-- <a id="navbarDropdown" class="text-sm font-medium text-gray-600 dark:text-blue-500" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
@@ -65,34 +67,44 @@
                                     {{-- <a class="text-sm font-medium text-gray-600 dark:text-gray-500 dark:hover:text-gray-500 hover:text-gray-700" >
                                             {{ current_user()->email }}
                                     </a> --}}
-                                    @if (Route::current()->getName() == 'home')
                                         <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
                                             {{ __('Logout') }}
                                         </a>
-                                            @if (isIshraqAdmin())
-                                            <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                                href="{{ route('dashboard') }}">
-                                                    {{ __('Dashboard') }}
-                                            </a>
-                                            <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                                                href="{{ route('reset') }}">
-                                                    {{ __('Reset Code') }}
-                                            </a>
-                                            @endif
-                                        @else
-                                        <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('home') }}">
-                                            {{ __('Home') }}
-                                        </a>
-                                    @endif
-
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>
                             </li>
+
+                            @if (isIshraqAdmin())
+                            <li class="flex items-center justify-between">
+                                <div class="" aria-labelledby="navbarDropdown">
+                                <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                    href="{{ route('dashboard') }}">
+                                        {{ __('Dashboard') }}
+                                </a>
+                                </div>
+                            </li>
+                            <li class="flex items-center justify-between">
+                                <div class="" aria-labelledby="navbarDropdown">
+                                <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                    href="{{ route('reset') }}">
+                                        {{ __('Reset Code') }}
+                                </a>
+                                </div>
+                            </li>
+                            @endif
+                            @else
+                            <li class="flex items-center justify-between">
+                                <div class="" aria-labelledby="navbarDropdown">
+                                <a class="text-sm font-medium text-blue-600 dark:text-blue-500 hover:underline" href="{{ route('home') }}">
+                                    {{ __('Home') }}
+                                </a>
+                                </div>
+                            </li>
+                            @endif
                         @endguest
                     </ul>
                 </div>
