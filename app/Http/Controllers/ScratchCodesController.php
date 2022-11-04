@@ -68,7 +68,9 @@ class ScratchCodesController extends Controller
         $resetHistory=ResetHistory::where("code",$request->code)->count();
 
         if($resetHistory>=env("max_reset_time")){
-            return view("reset_code",["message"=>"This Code has already been reseted before"]);
+             $history=ResetHistory::where("code",$request->code)->get();
+
+            return view("reset_code",["message"=>"This Code has already been reseted before","history"=>$history]);
         }
 
         $resetObject=new ResetHistory();
@@ -80,16 +82,17 @@ class ScratchCodesController extends Controller
 
         $resetObject->save();
       
+        $history=ResetHistory::where("code",$request->code)->get();
 
         $code->status=0;
         $code->update();
-        return view("reset_code",["message"=>"Code ".$request->code." is reseted to not used successfully the old mint account id is ".$code->consumed_by]);
+        return view("reset_code",["message"=>"Code ".$request->code." is reseted to not used successfully the old mint account id is ".$code->consumed_by,"history"=>$history]);
 
     }
 
     public function reset(Request $request){
        
-        return view("reset_code",["message"=>""]);
+        return view("reset_code",["message"=>"","history"=>[]]);
 
     }
 

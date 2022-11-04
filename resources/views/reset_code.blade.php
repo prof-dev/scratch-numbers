@@ -56,7 +56,35 @@
                     </div>
                     @endif
                 </form>
+
+                @if(sizeOf($history)>0)
+                <h1>Reset History </h1>
+                @endif
+            <div class="relative overflow-x-auto overflow-y-auto">
+                @if(sizeOf($history)>0)
+                    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                     <thead class="text-xs text-center text-white uppercase bg-gray-900 dark:bg-gray-700 dark:text-gray-400">
+                        <td>Code</td>
+                        <td>TimeStamp</td>
+                        <td>User</td>
+                        <td>Mint Account Id</td>
+                    </thead>
+                @endif
+                @foreach ($history as $item)
+                    <tr class="text-center bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <td>{{$item->code}}</td>
+                        <td>{{$item->created_at}}</td>
+                        <td>{{$item->user_name}}</td>
+                        <td>{{$item->consumed_by}}</td>
+                     
+                    </tr>
+                @endforeach
+
+                @if(sizeOf($history)>0)
+                    </table>
+                @endif
             </div>
+        </div>
         </div>
 
     </div>
