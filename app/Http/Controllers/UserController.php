@@ -39,7 +39,7 @@ class UserController extends Controller
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|min:6',
                 'role' => 'required|integer',
-                'company' => 'integer',
+                'company' => 'integer|exists:companies,id',
             ]
         );
         if (
@@ -49,6 +49,7 @@ class UserController extends Controller
                     'email' => $validated['email'],
                     'password' => bcrypt($validated['password']),
                     'role_id' => $validated['role'],
+                    'company_id'=>$validated['company']
                 ]
             )
         ) {
