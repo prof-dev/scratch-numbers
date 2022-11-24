@@ -67,7 +67,7 @@ class ScratchCodesController extends Controller
 
         $resetHistory=ResetHistory::where("code",$request->code)->count();
 
-        if($resetHistory>=env("max_reset_time")){
+        if($resetHistory>=1){
              $history=ResetHistory::where("code",$request->code)->get();
 
             return view("reset_code",["message"=>"This Code has already been reseted before","history"=>$history]);
