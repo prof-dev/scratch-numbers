@@ -145,7 +145,7 @@ class ScratchCodesController extends Controller
             //check if the scratch code exists
             if ($code = ScratchCode::withTrashed()->where('code', $validated['Code'])->first()) {
                 //check if it is from the same type
-                if (strcmp($code['type'], $validated['Type']) == 0) {
+                if (strcmp($code['type'], $validated['Type']) == 0||true) {
                     //check if it is used
                     if ($code['status'] == 0) {
                         //softDeletes for the code
