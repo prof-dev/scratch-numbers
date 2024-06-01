@@ -93,8 +93,12 @@ class ScratchCodesController extends Controller
     }
 
 
-    public function resetIfNotUsed( $code)
+    public function resetIfNotUsed( $code,Request $request)
     {
+        $apiToken = $request->header('Authorization-Token');
+        if ($apiToken !== '3fXeVRRTYAg4KUaE6fGoSAcXsYqDtvfYPSWWgAiW') {
+            return response()->json(['message' => 'UnAuthorized'], 401);
+        }
 
         $codeModel=ScratchCode::where('code',$code)->first();
 
