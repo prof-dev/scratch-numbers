@@ -102,7 +102,7 @@ class ScratchCodesController extends Controller
         }
 
 
-        $url = 'https://url/api/account/activation/GWD347335';
+        $url = 'https://api.mint-sudan.com/api/account/activation/'.$code;
         $headers = [
             'Cookie' => 'mint-cookie=1717215085.6.25.61|feb329d474859311e329c81b6d930509'
         ];
