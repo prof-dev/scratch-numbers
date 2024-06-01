@@ -100,13 +100,14 @@ class ScratchCodesController extends Controller
             return response()->json(['message' => 'UnAuthorized'], 401);
         }
 
-        $codeModel=ScratchCode::where('code',$code)->first();
+        $codeModel = ScratchCode::where('code', $code)->first();
 
-
-        if($codeModel->is_null()){
+        if ($codeModel == null) {
             return response()->json(['error' => 'code is incorrect'], 200);
         }
-
+        
+        // Continue with your logic here if the code is correct
+        
 
         $url = 'https://api.mint-sudan.com/api/account/activation/'.$code;
         $headers = [
