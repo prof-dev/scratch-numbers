@@ -90,6 +90,65 @@ class ScratchCodesController extends Controller
 
     }
 
+
+    public function resetIfNotUsed( $code)
+    {
+
+        $codeModel=ScratchCode::where('code',$code)->first();
+
+
+        if($codeModel->is_null()){
+            return response()->json(['error' => 'code is incorrect'], 200);
+        }
+
+
+        $url = 'https://url/api/account/activation/GWD347335';
+        $headers = [
+            'Cookie' => 'mint-cookie=1717215085.6.25.61|feb329d474859311e329c81b6d930509'
+        ];
+
+        // Sending the request using Laravel's Http client
+        try {
+            $response = Http::withHeaders($headers)->get($url);
+
+            // Checking if the request was successful
+            if ($response->successful()) {
+                // Parsing the response body as JSON
+                $data = $response->json();
+
+                // Check if 'data' is an array and its size is greater than 0
+                if (isset($data['data']) && is_array($data['data']) && count($data['data']) > 0) {
+                    // Perform the desired action here
+                    // For example, logging the size of the array
+                    Log::info('Data array size: ' . count($data['data']));
+                    
+                    // Example action: returning a custom message
+                    return response()->json([
+                        'message' => 'code is already used',
+                        'data' => $data
+                    ]);
+                }
+
+                $codeModel->status=0;
+                $codeModel->update();
+
+                // Returning the JSON response
+                return response()->json([
+                    'message' => 'code has been reset successfully',
+                    'data' => $code
+                ]);
+            } else {
+                // Handle the error accordingly
+                Log::error('Request failed with status ' . $response->status(), ['response' => $response->body()]);
+                return response()->json(['error' => 'Request failed'], $response->status());
+            }
+        } catch (\Exception $e) {
+            // Logging the exception
+            Log::error('Request failed with exception: ' . $e->getMessage());
+            return response()->json(['error' => 'Request failed with exception: ' . $e->getMessage()], 500);
+        }
+    }
+
     public function reset(Request $request){
        
         return view("reset_code",["message"=>"","history"=>[]]);

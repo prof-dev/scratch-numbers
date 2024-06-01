@@ -20,5 +20,6 @@ Route::middleware('auth:sanctum')->group(
             Route::get('/logout-app', [\App\Http\Controllers\Auth\LoginController::class, 'apiLogout']);
 
         Route::post('/generate', [\App\Http\Controllers\ScratchCodesController::class, 'generateJsonBatch'])->name('generate');
+        Route::get('/reset-api/{code}', [\App\Http\Controllers\ScratchCodesController::class, 'resetIfNotUsed'])->name('resetapi');
     });
 Route::post('/consume', [\App\Http\Controllers\ScratchCodesController::class, 'destroy'])->name('consume');
