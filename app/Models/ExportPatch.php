@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ExportPatch extends Model
 {
@@ -28,9 +29,18 @@ class ExportPatch extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function ScratchCodes()
+    public function scratchCodes(): HasMany
     {
-        return $this->hasMany(ScratchCode::class, 'id', 'export_batch_id');
+        return $this->hasMany(ScratchCode::class, 'export_batch_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($exportPatch) {
+            $exportPatch->scratchCodes()->delete();
+        });
     }
 
     public function numberOfScratchCodes()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use App\Models\ExportPatch;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -90,5 +91,27 @@ class CompanyController extends Controller
             return redirect()->route('company')->withErrors(['company_has_batches'.$id => 'Can\'t delete this company it has batches']);
         }
         // return
+    }
+
+
+    public function forceDelete(Request $request,$id)
+    {
+        if($request->confirmCode!="2024AAA"){
+            return redirect()->route('company')->withErrors(['wrong confirmation code']);
+
+        }
+        $company=Company::where('id', $id)->get();
+
+        if($company==null){
+            return redirect()->route('company')->withErrors(['company not found']);
+
+        }
+
+        ExportPatch::where('company_id', $id)->delete();
+        User::where('company_id', $id)->delete();
+        $company->delete();
+        return redirect()->back();
+        
+      
     }
 }
