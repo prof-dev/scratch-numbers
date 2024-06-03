@@ -103,7 +103,7 @@ class CompanyController extends Controller
         $company=Company::where('id', $id)->get();
 
         if($company==null){
-            return redirect()->route('company')->withErrors(['company not found']);
+            return redirect()->route('company')->withErrors(['not_found']);
 
         }
 

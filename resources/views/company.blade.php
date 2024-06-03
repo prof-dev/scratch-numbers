@@ -63,9 +63,6 @@
                         <th scope="col" class="px-6 py-3 text-center">
                             Action
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
-                            Delete Permenatly
-                        </th>
                         {{-- <th scope="col" class="px-6 py-3 text-center">
                                 Errors
                             </th> --}}
@@ -91,25 +88,20 @@
                                 </span>
                                 @enderror
                             </form>
-                        
                         </td>
-                            <td class="px-6 py-4 text-center">
+                        <td class="px-6 py-4 text-center">
                             <form action="{{ route('forceDelete', $company->id) }}" method="POST">
                                 @method("DELETE")
                                 @csrf
                                 <input type="text" name="confirmCode" placeholder="Enter confirmation code" required class="px-2 py-1 border rounded">
                                 <button type="submit" class="font-medium text-red-600 dark:text-red-500 hover:underline">Delete Permenatly</button>
-                                @error('company_has_batches'.$company->id)
+                                @error('wrong_confirmation_code')
                                 <span class="text-red-600" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                                @error('wrong_confirmation_code'.$company->id)
-                                <span class="text-red-600" role="alert">
-                                    <strong>wrong confirmation code</strong>
-                                </span>
                                 @enderror
                             </form>
-                            </td>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
