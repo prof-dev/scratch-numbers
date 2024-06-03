@@ -33,8 +33,15 @@ class ExportPatch extends Model
         return $this->hasMany(ScratchCode::class, 'id', 'export_batch_id');
     
     }
-
     
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($exportPatch) {
+            $exportPatch->scratchCodes()->delete();
+        });
+    }
     public function numberOfScratchCodes()
     {
         return ScratchCode::where('export_batch_id', $this->id)->get()->count();
