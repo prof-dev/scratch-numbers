@@ -54,14 +54,17 @@
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                 <thead class="text-xs text-white uppercase bg-gray-900 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-4 py-3">
                             Company Name
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="px-4 py-3">
                             # Users In Company
                         </th>
-                        <th scope="col" class="px-6 py-3 text-center">
+                        <th scope="col" class="px-4 py-3 text-center">
                             Action
+                        </th>
+                        <th scope="col" class="px-4 py-3 text-center">
+                            Force Delete
                         </th>
                         {{-- <th scope="col" class="px-6 py-3 text-center">
                                 Errors
