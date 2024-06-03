@@ -63,6 +63,9 @@
                         <th scope="col" class="px-6 py-3 text-center">
                             Action
                         </th>
+                        <th scope="col" class="px-6 py-3 text-center">
+                            Delete Permenatly
+                        </th>
                         {{-- <th scope="col" class="px-6 py-3 text-center">
                                 Errors
                             </th> --}}
@@ -88,6 +91,9 @@
                                 </span>
                                 @enderror
                             </form>
+                        
+                        </td>
+                            <td class="px-6 py-4 text-center">
                             <form action="{{ route('forceDelete', $company->id) }}" method="POST">
                                 @method("DELETE")
                                 @csrf
@@ -99,13 +105,11 @@
                                 </span>
                                 @error('wrong confirmation code'.$company->id)
                                 <span class="text-red-600" role="alert">
-                                    <strong>{{ $message }}</strong>
                                     <strong>wrong confirmation code</strong>
                                 </span>
                                 @enderror
                             </form>
-                        </td>
-                    
+                            </td>
                     </tr>
                     @endforeach
                 </tbody>
