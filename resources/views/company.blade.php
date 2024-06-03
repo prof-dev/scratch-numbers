@@ -103,7 +103,7 @@
                                 <span class="text-red-600" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                                @error('wrong confirmation code'.$company->id)
+                                @error('wrong_confirmation_code'.$company->id)
                                 <span class="text-red-600" role="alert">
                                     <strong>wrong confirmation code</strong>
                                 </span>

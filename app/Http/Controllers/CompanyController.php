@@ -97,7 +97,7 @@ class CompanyController extends Controller
     public function forceDelete(Request $request,$id)
     {
         if($request->confirmCode!="2024AAA"){
-            return redirect()->route('company')->withErrors(['wrong confirmation code']);
+            return redirect()->route('company')->withErrors(['wrong_confirmation_code']);
 
         }
         $company=Company::where('id', $id)->get();
