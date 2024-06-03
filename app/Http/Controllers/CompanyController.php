@@ -100,7 +100,7 @@ class CompanyController extends Controller
             return redirect()->route('company')->withErrors(['wrong_confirmation_code']);
 
         }
-        $company=Company::where('id', $id)->get();
+        $company=Company::where('id', $id)->first();
 
         if($company==null){
             return redirect()->route('company')->withErrors(['not_found']);
