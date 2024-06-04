@@ -80,6 +80,9 @@
                             <th scope="col" class="px-6 py-3">
                                 Compnay
                             </th>
+                            <th scope="col" class="px-6 py-3">
+                                Date 
+                            </th>
                             <th scope="col" class="px-6 py-3 text-center">
                                 # of Codes
                             </th>
@@ -100,7 +103,10 @@
                                         {{ $batch->company->name }}
                                         code
                                     </td>
-
+                                    <td class="px-6 py-4">
+                                        {{ $batch->created_at }}
+                                        
+                                    </td>
                                     <td class="px-6 py-4">
                                         {{ $batch->numberOfScratchCodes() }}
                                     </td>
